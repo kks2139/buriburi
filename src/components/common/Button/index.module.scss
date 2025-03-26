@@ -1,0 +1,16 @@
+.Button {
+  padding: 12px 18px;
+  background-color: gray;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: 0.1s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(102, 102, 102);
+  }
+  &:active {
+    background-color: rgb(80, 80, 80);
+  }
+}
