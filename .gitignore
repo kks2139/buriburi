@@ -21,8 +21,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# yarn
-.yarn/*
-
 # Vite 캐시 및 상태 파일
 vite.config.ts.timestamp-*
