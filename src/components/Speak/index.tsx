@@ -23,6 +23,13 @@ function Speak() {
     highlightText: true,
     showOnlyHighlightedText: false,
     highlightMode: 'word',
+    highlightProps: {
+      style: {
+        backgroundColor: 'transparent',
+        borderRadius: '3px',
+        boxShadow: '0 0 5px 0 red',
+      },
+    },
   });
 
   useEffect(() => {
@@ -51,15 +58,15 @@ function Speak() {
         <textarea
           className={cn('input-text')}
           value={inputText}
+          disabled={speechStatus === 'started' || speechStatus === 'paused'}
           onChange={(e) => {
             setinputText(e.target.value);
           }}
         />
       </div>
 
-      <span className={cn('arrow')}>출력 {'>'} </span>
-
       <div className={cn('result-text')}>
+        출력 : <br />
         <Text />
       </div>
     </div>
