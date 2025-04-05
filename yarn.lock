@@ -1802,6 +1802,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-speech-recognition: "npm:^4.0.0"
+    react-text-to-speech: "npm:^1.4.3"
     sass-embedded: "npm:^1.77.8"
     typescript: "npm:^5.5.3"
     typescript-eslint: "npm:^8.0.1"
@@ -2240,6 +2241,16 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 10c0/25261044669980daeae6e2d93ad236473844abb04302446fc8fcc3070b04d02031a47fbc190db562cdf339072f326df3f0e45a3015a035638f7ecdb617e697c7
+  languageName: node
+  linkType: hard
+
+"react-text-to-speech@npm:^1.4.3":
+  version: 1.4.3
+  resolution: "react-text-to-speech@npm:1.4.3"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/427d4cd761e316ad85af5b81266f84015d0de770aafb66a1923fc396c192d890947d064428326f7fd44e0224a2ed369579f222aa471f76cf9820480df763774d
   languageName: node
   linkType: hard
 

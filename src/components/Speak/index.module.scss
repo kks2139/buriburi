@@ -1,0 +1,17 @@
+.Speak {
+  margin-top: 20px;
+
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 5px;
+
+    button {
+      text-align: center;
+    }
+  }
+
+  .text {
+    padding: 5px;
+  }
+}

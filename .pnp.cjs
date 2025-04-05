@@ -44,6 +44,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"],\
           ["react-speech-recognition", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:4.0.0"],\
+          ["react-text-to-speech", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:1.4.3"],\
           ["sass-embedded", "npm:1.77.8"],\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"],\
           ["typescript-eslint", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:8.1.0"],\
@@ -2270,6 +2271,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"],\
           ["react-speech-recognition", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:4.0.0"],\
+          ["react-text-to-speech", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:1.4.3"],\
           ["sass-embedded", "npm:1.77.8"],\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"],\
           ["typescript-eslint", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:8.1.0"],\
@@ -2787,6 +2789,32 @@ const RAW_RUNTIME_STATE =
         ],\
         "packagePeers": [\
           "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-text-to-speech", [\
+      ["npm:1.4.3", {\
+        "packageLocation": "./.yarn/cache/react-text-to-speech-npm-1.4.3-6013eb348d-427d4cd761.zip/node_modules/react-text-to-speech/",\
+        "packageDependencies": [\
+          ["react-text-to-speech", "npm:1.4.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:1.4.3", {\
+        "packageLocation": "./.yarn/__virtual__/react-text-to-speech-virtual-fbd62d52c5/0/cache/react-text-to-speech-npm-1.4.3-6013eb348d-427d4cd761.zip/node_modules/react-text-to-speech/",\
+        "packageDependencies": [\
+          ["react-text-to-speech", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:1.4.3"],\
+          ["@types/react", "npm:18.3.3"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
           "react"\
         ],\
         "linkType": "HARD"\
