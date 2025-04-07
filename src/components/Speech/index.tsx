@@ -1,9 +1,9 @@
+import classNames from "classnames/bind";
 import SpeechRecognition, {
   useSpeechRecognition,
-} from 'react-speech-recognition';
+} from "react-speech-recognition";
 
-import styles from './index.module.scss';
-import classNames from 'classnames/bind';
+import styles from "./index.module.scss";
 
 const cn = classNames.bind(styles);
 
@@ -21,13 +21,13 @@ function Speech() {
   }
 
   return (
-    <div className={cn('Speech')}>
-      <div className={cn('buttons')}>
+    <div className={cn("Speech")}>
+      <div className={cn("buttons")}>
         <button
           onClick={() =>
             SpeechRecognition.startListening({
               continuous: true,
-              language: 'ko-KR',
+              language: "ko-KR",
             })
           }
         >
@@ -37,12 +37,12 @@ function Speech() {
         <button onClick={resetTranscript}>🔄 리셋</button>
       </div>
 
-      <div className={cn('status', { active: listening })}>
-        🎧 상태 : <span>{listening ? '듣는 중' : '대기 중'}</span>
+      <div className={cn("status", { active: listening })}>
+        🎧 상태 : <span>{listening ? "듣는 중" : "대기 중"}</span>
       </div>
 
-      <div className={cn('result-text')}>
-        {transcript || '인식된 내용이 없음.'}
+      <div className={cn("result-text")}>
+        {transcript || "인식된 내용이 없음."}
       </div>
     </div>
   );

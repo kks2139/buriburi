@@ -1,16 +1,17 @@
-import styles from './index.module.scss';
-import classNames from 'classnames/bind';
+import classNames from "classnames/bind";
+import { ButtonHTMLAttributes } from "react";
+
+import styles from "./index.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
-  onClick?: () => void;
 }
 
-function Button({ children, onClick }: Props) {
+function Button({ children, ...rest }: Props) {
   return (
-    <button className={cn('Button')} onClick={onClick}>
+    <button {...rest} className={cn("Button")}>
       {children}
     </button>
   );

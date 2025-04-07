@@ -1,13 +1,16 @@
-import Speak from './components/Speak';
-import Speech from './components/Speech';
-import './global.scss';
+import "./global.scss";
+
+import { Route, Routes } from "react-router-dom";
+
+import Test from "./components/pages/Test";
 
 function App() {
   return (
-    <div>
-      <Speech />
-      <Speak />
-    </div>
+    <Routes>
+      {/* <Route index element={<Main />} /> */}
+      <Route index element={<Test />} />
+      <Route path="/test" element={<Test />} />
+    </Routes>
   );
 }
 

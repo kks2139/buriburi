@@ -1,11 +1,12 @@
-import { useSpeech, useVoices } from 'react-text-to-speech';
-import styles from './index.module.scss';
-import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import classNames from "classnames/bind";
+import { useEffect, useState } from "react";
+import { useSpeech, useVoices } from "react-text-to-speech";
+
+import styles from "./index.module.scss";
 
 const cn = classNames.bind(styles);
 
-const LANG = 'ko-KR';
+const LANG = "ko-KR";
 const DEFAULT_TEXT = `안녕하세요, 저는 젤다입니다. 크래딧클랜에서 리더를 맡고있습니다. 저의 필살기는 젤다브레스 입니다. 후우, 하아, 후우, 하아`;
 
 function Speak() {
@@ -14,7 +15,7 @@ function Speak() {
 
   const { voices } = useVoices();
 
-  const { Text, speechStatus, start, pause, stop } = useSpeech({
+  const { speechStatus, start, pause, stop } = useSpeech({
     text: inputText,
     pitch: 2,
     rate: 1.1,
@@ -22,12 +23,12 @@ function Speak() {
     voiceURI,
     highlightText: true,
     showOnlyHighlightedText: false,
-    highlightMode: 'word',
+    highlightMode: "word",
     highlightProps: {
       style: {
-        backgroundColor: 'transparent',
-        borderRadius: '3px',
-        boxShadow: '0 0 5px 0 red',
+        backgroundColor: "transparent",
+        borderRadius: "3px",
+        boxShadow: "0 0 5px 0 red",
       },
     },
   });
@@ -41,33 +42,28 @@ function Speak() {
   }, [voices]);
 
   return (
-    <div className={cn('Speak')}>
-      <div className={cn('inputs')}>
-        <div className={cn('buttons')}>
-          <button disabled={speechStatus === 'started'} onClick={start}>
+    <div className={cn("Speak")}>
+      <div className={cn("inputs")}>
+        <div className={cn("buttons")}>
+          <button disabled={speechStatus === "started"} onClick={start}>
             시작
           </button>
-          <button disabled={speechStatus === 'paused'} onClick={pause}>
+          <button disabled={speechStatus === "paused"} onClick={pause}>
             일시정지
           </button>
-          <button disabled={speechStatus === 'stopped'} onClick={stop}>
+          <button disabled={speechStatus === "stopped"} onClick={stop}>
             그만
           </button>
         </div>
 
         <textarea
-          className={cn('input-text')}
+          className={cn("input-text")}
           value={inputText}
-          disabled={speechStatus === 'started' || speechStatus === 'paused'}
+          disabled={speechStatus === "started" || speechStatus === "paused"}
           onChange={(e) => {
             setinputText(e.target.value);
           }}
         />
-      </div>
-
-      <div className={cn('result-text')}>
-        출력 : <br />
-        <Text />
       </div>
     </div>
   );
