@@ -1,0 +1,24 @@
+.Entry {
+  position: relative;
+
+  .title {
+    padding: 0 16px;
+    margin: 24px 0 32px 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 16px;
+  }
+
+  .start-button {
+    position: fixed;
+    bottom: 24px;
+    padding: 0 24px;
+    width: 100%;
+  }
+}

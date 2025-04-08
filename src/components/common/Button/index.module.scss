@@ -1,16 +1,20 @@
+$padding: 20px;
+
 .Button {
-  padding: 12px 18px;
-  background-color: gray;
-  color: white;
+  padding: $padding;
+  background-color: $primary;
+  color: black;
+  border-radius: 40px;
+  transition: 0.2s;
   font-weight: bold;
-  border-radius: 8px;
-  transition: 0.1s;
+  text-align: center;
   cursor: pointer;
 
-  &:hover {
-    background-color: rgb(102, 102, 102);
+  &.full {
+    width: calc(100% - ($padding * 2));
   }
+
   &:active {
-    background-color: rgb(80, 80, 80);
+    transform: scale(0.95);
   }
 }

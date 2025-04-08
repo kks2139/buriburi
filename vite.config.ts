@@ -1,8 +1,16 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "src/styles/_variables.scss" as *;`,
+        // 또는 @import 사용 가능하지만 use를 권장합니다
+      },
+    },
+  },
 });

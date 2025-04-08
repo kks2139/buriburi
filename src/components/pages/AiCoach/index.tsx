@@ -4,8 +4,8 @@ import styles from "./index.module.scss";
 
 const cn = classNames.bind(styles);
 
-function Main() {
-  return <div className={cn("Main")}>메인페이지</div>;
+function AiCoach() {
+  return <main className={cn("AiCoach")}>코치 선택</main>;
 }
 
-export default Main;
+export default AiCoach;
