@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
 import Chip from "@/components/common/Chip";
@@ -9,6 +10,8 @@ import styles from "./index.module.scss";
 const cn = classNames.bind(styles);
 
 function Entry() {
+  const navigate = useNavigate();
+
   const selectedAiStyle = useEntryStore((state) => state.selectedAiStyle);
   const setAiStyle = useEntryStore((state) => state.setAiStyle);
 
@@ -34,7 +37,9 @@ function Entry() {
       </ul>
 
       <div className={cn("start-button")}>
-        <Button fullSize>대출코치 만나기</Button>
+        <Button fullSize onClick={() => navigate("/ai-coach")}>
+          대출코치 만나기
+        </Button>
       </div>
     </div>
   );
