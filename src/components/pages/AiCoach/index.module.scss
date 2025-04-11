@@ -1,12 +1,20 @@
 .AiCoach {
-  background-image: url("../../..//assets/img/img-bg-1.png");
-  background-size: cover;
+  position: relative;
+  background-image: url("../../../assets/img/img-bg-1.png");
+  background-size: calc(100% + 3px) auto;
   background-position: center;
   height: 100vh;
-  padding-top: 130px;
+  overflow: hidden;
 
   .title {
+    z-index: 1;
+    position: absolute;
+    top: 10%;
+    width: 100%;
     text-align: center;
+    transform: translateY(16px);
+    opacity: 0;
+    animation: title-show-up 0.5s ease-out forwards;
 
     h2 {
       font-size: 20px;
@@ -16,12 +24,19 @@
   }
 
   .ai-img {
+    z-index: 0;
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% - 85px));
     width: 100%;
     max-width: 370px;
+    animation: coach-show-up 0.5s ease-out forwards;
+
+    &.wide {
+      width: calc(100% + 200px);
+      max-width: 455px;
+    }
   }
 
   .float-layout {
@@ -64,26 +79,24 @@
       }
     }
   }
-}
 
-.loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .lottie {
-    width: 60px;
-    height: 60px;
-    box-shadow: 0 0 0 1px red;
+  @keyframes title-show-up {
+    from {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 
-  .title {
-    font-size: 16px;
-    color: $medium;
-    margin-top: 18px;
+  @keyframes coach-show-up {
+    from {
+      transform: translateX(calc(-50% - 85px));
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 }

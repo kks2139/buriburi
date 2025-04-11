@@ -29,7 +29,7 @@ export const AI_STYLES: AiStyle[] = [
   "경험자",
 ];
 
-type AiCoach = "gln" | "syc";
+export type AiCoachType = "gln" | "syc";
 
 interface AiSpec {
   name: string;
@@ -40,7 +40,7 @@ interface AiSpec {
   }[];
 }
 
-export const AI_INFO: Record<AiCoach, AiSpec> = {
+export const AI_INFO: Record<AiCoachType, AiSpec> = {
   gln: {
     name: "금리나",
     age: 34,

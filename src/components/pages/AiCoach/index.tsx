@@ -3,30 +3,37 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ImgCoach1 from "@/assets/img/img-coach-1.png";
+import ImgCoach2 from "@/assets/img/img-coach-2.png";
 import Button from "@/components/common/Button";
-import { AI_INFO } from "@/store";
+import { AI_INFO, AiCoachType } from "@/store";
 
 import styles from "./index.module.scss";
+import Loading from "./Loading";
 
 const cn = classNames.bind(styles);
 
 function AiCoach() {
   const navigate = useNavigate();
 
-  // TODO: AI스타일 요청
   const [isAiLoading, setIsAiLoading] = useState(true);
+  const [coachType, setCoachType] = useState<AiCoachType>();
+
+  const isType1 = coachType === "gln";
+  const aiInfo = isType1 ? AI_INFO.gln : AI_INFO.syc;
 
   useEffect(() => {
-    setTimeout(() => setIsAiLoading(false), 1_000);
+    (async () => {
+      // TODO: AI타입 api?
+      await new Promise((res) => setTimeout(res, 1000));
+
+      setCoachType(Date.now() % 2 === 0 ? "gln" : "syc");
+
+      setIsAiLoading(false);
+    })();
   }, []);
 
   if (isAiLoading) {
-    return (
-      <div className={cn("loading")}>
-        <img className={cn("lottie")} src="" alt="" width={60} height={60} />
-        <h3 className={cn("title")}>대출코치 매칭 중</h3>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -39,17 +46,20 @@ function AiCoach() {
         </h2>
       </div>
 
-      <img className={cn("ai-img")} src={ImgCoach1} />
+      <img
+        className={cn("ai-img", { wide: !isType1 })}
+        src={isType1 ? ImgCoach1 : ImgCoach2}
+      />
 
       <div className={cn("float-layout")}>
         <section className={cn("ai-info")}>
           <div className={cn("content")}>
             <span
               className={cn("name")}
-            >{`${AI_INFO.gln.name}(${AI_INFO.gln.age}세)`}</span>
+            >{`${aiInfo.name}(${aiInfo.age}세)`}</span>
 
             <ul className={cn("specs")}>
-              {AI_INFO.gln.spec.map(({ Icon, value }) => (
+              {aiInfo.spec.map(({ Icon, value }) => (
                 <li key={value}>
                   <Icon width={16} height={16} />
                   <span>{value}</span>
