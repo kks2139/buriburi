@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
 import Chip from "@/components/common/Chip";
-import { AI_STYLES, AiStyle, useEntryStore } from "@/store";
+import { AI_STYLES, AiStyle, useAiStore } from "@/store";
 
 import styles from "./index.module.scss";
 
@@ -12,8 +12,8 @@ const cn = classNames.bind(styles);
 function Entry() {
   const navigate = useNavigate();
 
-  const selectedAiStyle = useEntryStore((state) => state.selectedAiStyle);
-  const setAiStyle = useEntryStore((state) => state.setAiStyle);
+  const selectedAiStyle = useAiStore((state) => state.selectedAiStyle);
+  const setAiStyle = useAiStore((state) => state.setAiStyle);
 
   return (
     <div className={cn("Entry")}>

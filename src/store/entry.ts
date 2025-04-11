@@ -1,5 +1,8 @@
+import { FunctionComponent } from "react";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+
+import { SvgBag, SvgBrain, SvgSoundVive } from "@/assets/svg";
 
 export type AiStyle =
   | "정중한"
@@ -26,12 +29,62 @@ export const AI_STYLES: AiStyle[] = [
   "경험자",
 ];
 
-interface EntryStore {
+type AiCoach = "gln" | "syc";
+
+interface AiSpec {
+  name: string;
+  age: number;
+  spec: {
+    Icon: FunctionComponent<React.SVGProps<SVGSVGElement>>;
+    value: string;
+  }[];
+}
+
+export const AI_INFO: Record<AiCoach, AiSpec> = {
+  gln: {
+    name: "금리나",
+    age: 34,
+    spec: [
+      {
+        Icon: SvgBag,
+        value: "토마토저축은행 10년 근속",
+      },
+      {
+        Icon: SvgBrain,
+        value: "이성적·분석적·현실적",
+      },
+      {
+        Icon: SvgSoundVive,
+        value: "따뜻하고 차분한 말투·쉬운 설명",
+      },
+    ],
+  },
+  syc: {
+    name: "신용철",
+    age: 30,
+    spec: [
+      {
+        Icon: SvgBag,
+        value: "금융데이터 분석 전문가 찐친",
+      },
+      {
+        Icon: SvgBrain,
+        value: "분석적·전략적·핵심적",
+      },
+      {
+        Icon: SvgSoundVive,
+        value: "친근하고 유쾌한 말투·쉬운 설명",
+      },
+    ],
+  },
+};
+
+interface AiStore {
   selectedAiStyle: Set<AiStyle>;
   setAiStyle: (style: AiStyle) => void;
 }
 
-export const useEntryStore = create<EntryStore>()(
+export const useAiStore = create<AiStore>()(
   immer((set, get) => ({
     selectedAiStyle: new Set<AiStyle>(),
     setAiStyle: (style) => {
