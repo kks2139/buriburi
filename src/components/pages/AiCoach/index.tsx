@@ -2,8 +2,6 @@ import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import ImgCoach1 from "@/assets/img/img-coach-1.png";
-import ImgCoach2 from "@/assets/img/img-coach-2.png";
 import Button from "@/components/common/Button";
 import { AI_INFO, AiCoachType } from "@/store";
 
@@ -37,7 +35,7 @@ function AiCoach() {
   }
 
   return (
-    <main className={cn("AiCoach")}>
+    <main className={cn("AiCoach", { type1: isType1 })}>
       <div className={cn("title")}>
         <h2>
           대출 기초부터 실행까지
@@ -48,7 +46,7 @@ function AiCoach() {
 
       <img
         className={cn("ai-img", { wide: !isType1 })}
-        src={isType1 ? ImgCoach1 : ImgCoach2}
+        src={isType1 ? "/img-coach-1.png" : "/img-coach-2.png"}
       />
 
       <div className={cn("float-layout")}>

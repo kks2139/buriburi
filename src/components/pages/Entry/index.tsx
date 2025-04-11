@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
@@ -36,11 +37,21 @@ function Entry() {
         ))}
       </ul>
 
-      <div className={cn("start-button")}>
-        <Button fullSize onClick={() => navigate("/ai-coach")}>
-          대출코치 만나기
-        </Button>
-      </div>
+      <AnimatePresence>
+        {selectedAiStyle.size > 0 && (
+          <motion.div
+            className={cn("start-button")}
+            initial={{ opacity: 0, transform: "translateY(10px)" }}
+            animate={{ opacity: 1, transform: "translateY(0)" }}
+            exit={{ opacity: 0, transform: "translateY(10px)" }}
+            transition={{ duration: 0.2 }}
+          >
+            <Button fullSize onClick={() => navigate("/ai-coach")}>
+              대출코치 만나기
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
