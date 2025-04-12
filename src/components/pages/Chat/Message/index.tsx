@@ -38,7 +38,7 @@ function Message({
       initial={{ opacity: 0, transform: "translateY(10px)" }}
       animate={{ opacity: 1, transform: "translateY(0)" }}
       exit={{ opacity: 0, transform: "translateY(10px)" }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.3 }}
     >
       {isAi ? (
         <>
