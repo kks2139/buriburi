@@ -5,10 +5,9 @@ $padding: 20px;
   background-color: $primary;
   color: black;
   border-radius: 40px;
-  transition: 0.1s;
+  transition: 0.2s;
   font-weight: bold;
   text-align: center;
-  cursor: pointer;
 
   &.full {
     width: calc(100% - ($padding * 2));

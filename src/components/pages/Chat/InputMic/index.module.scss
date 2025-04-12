@@ -1,0 +1,15 @@
+.InputMic {
+  padding: 16px;
+  border-radius: 30px;
+  box-shadow: 0 0 0 1px $grey-02;
+  transition: 0.2s;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+}

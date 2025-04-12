@@ -5,8 +5,7 @@
   font-weight: bold;
   background-color: $grey-01;
   border-radius: 24px;
-  cursor: pointer;
-  transition: 0.1s;
+  transition: 0.2s;
 
   &.selected {
     background-color: $high;

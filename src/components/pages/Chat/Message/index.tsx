@@ -1,0 +1,83 @@
+import classNames from "classnames/bind";
+import { motion } from "framer-motion";
+
+import ImgChatCoach1 from "@/assets/img/img-chat-coach-1.png";
+import ImgChatCoach2 from "@/assets/img/img-chat-coach-2.png";
+import { useAiStore } from "@/store";
+import { Speaker } from "@/store/chat";
+
+import styles from "./index.module.scss";
+
+const cn = classNames.bind(styles);
+
+interface Porps {
+  id: number;
+  speaker: Speaker;
+  message: string;
+  suggestions?: { title: string; subTitle?: string }[];
+  onClickSuggestion?: (title: string, subTitle?: string) => void;
+}
+
+function Message({
+  id,
+  speaker,
+  message,
+  suggestions = [],
+  onClickSuggestion,
+}: Porps) {
+  const selectedCoach = useAiStore((s) => s.selectedCoach);
+
+  const isAi = speaker === "AI";
+  const profileImg = isAi
+    ? selectedCoach === "GLN"
+      ? ImgChatCoach1
+      : ImgChatCoach2
+    : null;
+
+  return (
+    <motion.li
+      key={id}
+      className={cn("Message", { "show-on-right": speaker === "USER" })}
+      initial={{ opacity: 0, transform: "translateY(10px)" }}
+      animate={{ opacity: 1, transform: "translateY(0)" }}
+      exit={{ opacity: 0, transform: "translateY(10px)" }}
+      transition={{ duration: 0.2 }}
+    >
+      {isAi ? (
+        <>
+          {profileImg && (
+            <img
+              className={cn("profile-img")}
+              src={profileImg}
+              alt="프로필이미지"
+              width={60}
+              height={60}
+            />
+          )}
+          <div className={cn("message-ai")}>{message}</div>
+          {suggestions.length > 0 && (
+            <ul className={cn("suggestions")}>
+              {suggestions.map(({ title, subTitle }) => (
+                <li key={title + subTitle}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClickSuggestion?.(title, subTitle);
+                    }}
+                  >
+                    <div className={cn("title")}>{title}</div>
+                    <div className={cn("sub-title")}>{subTitle}</div>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
+      ) : (
+        <div className={cn("message-user")}>{message}</div>
+      )}
+    </motion.li>
+  );
+}
+
+export default Message;

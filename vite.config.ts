@@ -11,7 +11,6 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `@use "src/styles/_variables.scss" as *;`,
-        // 또는 @import 사용 가능하지만 use를 권장합니다
       },
     },
   },

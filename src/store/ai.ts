@@ -29,9 +29,9 @@ export const AI_STYLES: AiStyle[] = [
   "경험자",
 ];
 
-export type AiCoachType = "gln" | "syc";
+export type CoachType = "GLN" | "SYC";
 
-interface AiSpec {
+interface CoachInfo {
   name: string;
   age: number;
   spec: {
@@ -40,8 +40,8 @@ interface AiSpec {
   }[];
 }
 
-export const AI_INFO: Record<AiCoachType, AiSpec> = {
-  gln: {
+export const AI_INFO: Record<CoachType, CoachInfo> = {
+  GLN: {
     name: "금리나",
     age: 34,
     spec: [
@@ -59,7 +59,7 @@ export const AI_INFO: Record<AiCoachType, AiSpec> = {
       },
     ],
   },
-  syc: {
+  SYC: {
     name: "신용철",
     age: 30,
     spec: [
@@ -81,12 +81,15 @@ export const AI_INFO: Record<AiCoachType, AiSpec> = {
 
 interface AiStore {
   selectedAiStyle: Set<AiStyle>;
+  selectedCoach?: CoachType;
   setAiStyle: (style: AiStyle) => void;
+  setSelectedCoach: (coach: CoachType) => void;
 }
 
 export const useAiStore = create<AiStore>()(
   immer((set, get) => ({
     selectedAiStyle: new Set<AiStyle>(),
+    selectedCoach: undefined,
     setAiStyle: (style) => {
       const { selectedAiStyle } = get();
 
@@ -96,6 +99,11 @@ export const useAiStore = create<AiStore>()(
         } else {
           state.selectedAiStyle.add(style);
         }
+      });
+    },
+    setSelectedCoach: (coach) => {
+      set((state) => {
+        state.selectedCoach = coach;
       });
     },
   })),

@@ -1,0 +1,23 @@
+.InputText {
+  padding: 16px 20px;
+  border-radius: 24px;
+  box-shadow: 0 0 0 1px $grey-02;
+  width: 100%;
+  font-size: 15px;
+
+  white-space: pre;
+  box-sizing: border-box;
+  overflow-x: auto;
+
+  transition: 0.2s;
+
+  &:focus {
+    color: $high;
+    box-shadow: 0 0 0 1px $high;
+  }
+
+  &::placeholder {
+    font-size: 15px;
+    color: $low;
+  }
+}

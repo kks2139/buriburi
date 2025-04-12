@@ -1,2 +1,25 @@
 .Chat {
+  position: relative;
+  padding-top: 16px;
+
+  .messages {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  .input-container {
+    position: fixed;
+    bottom: 0;
+    padding: 20px 16px 24px 16px;
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(
+      to top,
+      rgb(255, 255, 255) 80%,
+      transparent 100%
+    );
+  }
 }

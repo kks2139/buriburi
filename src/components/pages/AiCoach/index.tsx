@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
-import { AI_INFO, AiCoachType } from "@/store";
+import { AI_INFO, CoachType, useAiStore, useChatStore } from "@/store";
 
 import styles from "./index.module.scss";
 import Loading from "./Loading";
@@ -12,23 +12,28 @@ const cn = classNames.bind(styles);
 
 function AiCoach() {
   const navigate = useNavigate();
+  const selectedCoach = useAiStore((s) => s.selectedCoach);
+  const setSelectedCoach = useAiStore((s) => s.setSelectedCoach);
+  const initMessage = useChatStore((s) => s.initMessage);
 
   const [isAiLoading, setIsAiLoading] = useState(true);
-  const [coachType, setCoachType] = useState<AiCoachType>();
 
-  const isType1 = coachType === "gln";
-  const aiInfo = isType1 ? AI_INFO.gln : AI_INFO.syc;
+  const isType1 = selectedCoach === "GLN";
+  const aiInfo = isType1 ? AI_INFO.GLN : AI_INFO.SYC;
 
   useEffect(() => {
     (async () => {
       // TODO: AI타입 api?
       await new Promise((res) => setTimeout(res, 1000));
 
-      setCoachType(Date.now() % 2 === 0 ? "gln" : "syc");
+      const coach: CoachType = Date.now() % 2 === 0 ? "GLN" : "SYC";
+
+      setSelectedCoach(coach);
+      initMessage(coach);
 
       setIsAiLoading(false);
     })();
-  }, []);
+  }, [initMessage, setSelectedCoach]);
 
   if (isAiLoading) {
     return <Loading />;
@@ -37,11 +42,7 @@ function AiCoach() {
   return (
     <main className={cn("AiCoach", { type1: isType1 })}>
       <div className={cn("title")}>
-        <h2>
-          대출 기초부터 실행까지
-          <br />
-          코칭해드릴게요
-        </h2>
+        <h2>{"대출 기초부터 실행까지\n코칭해드릴게요"}</h2>
       </div>
 
       <img

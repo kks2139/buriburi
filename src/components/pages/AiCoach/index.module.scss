@@ -1,8 +1,9 @@
 .AiCoach {
   position: relative;
   background-image: url("/img-bg-2.png");
-  background-size: calc(100% + 3px) auto;
+  background-size: calc(100% + 5px) calc(100% + 5px);
   background-position: center;
+  background-repeat: no-repeat;
   height: 100vh;
   overflow: hidden;
 

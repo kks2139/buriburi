@@ -1,0 +1,58 @@
+@mixin gray-box {
+  padding: 10px 14px;
+  border-radius: 16px;
+  background-color: $grey-01;
+  max-width: 260px;
+}
+
+.Message {
+  font-size: 16px;
+  line-height: 26px;
+
+  &.show-on-right {
+    align-self: flex-end;
+  }
+
+  .profile-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .message-ai {
+    padding: 16px 0 24px 0;
+    max-width: 320px;
+  }
+
+  .message-user {
+    @include gray-box;
+    margin-bottom: 24px;
+  }
+
+  .suggestions {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+
+    > li {
+      button {
+        @include gray-box;
+        transition: 0.2s;
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .sub-title {
+      font-size: 13px;
+      color: $medium;
+    }
+  }
+}
