@@ -33,7 +33,7 @@ function Chat() {
         <AnimatePresence>
           {messages.map(({ id, speaker, message, suggestions }) => (
             <Message
-              id={id}
+              key={id}
               speaker={speaker}
               message={message}
               suggestions={suggestions}

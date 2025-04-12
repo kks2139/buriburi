@@ -24,6 +24,10 @@ function InputText({ placeholder = "내용을 입력하세요" }: Props) {
         setInputValue(e.target.value);
       }}
       onKeyDown={(e) => {
+        if (!inputValue.trim()) {
+          return;
+        }
+
         if (e.key === "Enter") {
           addMessage({ speaker: "USER", message: inputValue });
           setInputValue("");

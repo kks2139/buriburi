@@ -11,7 +11,6 @@ import styles from "./index.module.scss";
 const cn = classNames.bind(styles);
 
 interface Porps {
-  id: number;
   speaker: Speaker;
   message: string;
   suggestions?: { title: string; subTitle?: string }[];
@@ -19,7 +18,6 @@ interface Porps {
 }
 
 function Message({
-  id,
   speaker,
   message,
   suggestions = [],
@@ -36,7 +34,6 @@ function Message({
 
   return (
     <motion.li
-      key={id}
       className={cn("Message", { "show-on-right": speaker === "USER" })}
       initial={{ opacity: 0, transform: "translateY(10px)" }}
       animate={{ opacity: 1, transform: "translateY(0)" }}

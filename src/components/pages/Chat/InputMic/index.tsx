@@ -1,7 +1,11 @@
 import classNames from "classnames/bind";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, useEffect } from "react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 import { Mic } from "@/assets/svg";
+import { useChatStore } from "@/store";
 
 import styles from "./index.module.scss";
 
@@ -12,11 +16,43 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function InputMic({ onAsk }: Props) {
-  // TODO: 음성인식 완료 타이밍
-  console.log(onAsk);
+  const addMessage = useChatStore((s) => s.addMessage);
+
+  const {
+    finalTranscript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  useEffect(() => {
+    if (finalTranscript) {
+      addMessage({ speaker: "USER", message: finalTranscript });
+      resetTranscript();
+
+      onAsk?.(finalTranscript);
+    }
+  }, [addMessage, finalTranscript, onAsk, resetTranscript]);
 
   return (
-    <button className={cn("InputMic")}>
+    <button
+      className={cn("InputMic", { listening })}
+      onClick={() => {
+        if (!browserSupportsSpeechRecognition) {
+          return;
+        }
+
+        if (listening) {
+          SpeechRecognition.stopListening();
+          resetTranscript();
+        } else {
+          SpeechRecognition.startListening({
+            continuous: true,
+            language: "ko-KR",
+          });
+        }
+      }}
+    >
       <div className={cn("icon")}>
         <Mic width={18} height={18} />
       </div>

@@ -2,10 +2,16 @@
   padding: 16px;
   border-radius: 30px;
   box-shadow: 0 0 0 1px $grey-02;
+  background-color: white;
   transition: 0.2s;
 
   &:active {
     transform: scale(0.9);
+  }
+
+  &.listening {
+    background-color: $primary;
+    box-shadow: 0 0 0 1px $primary;
   }
 
   .icon {
