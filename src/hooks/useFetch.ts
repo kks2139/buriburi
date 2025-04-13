@@ -10,7 +10,7 @@ const apiInfo: Record<ApiKey, Pick<FetchOptions, "url" | "method">> = {
     method: "POST",
   },
   healthCheck: {
-    url: "https://l7c7jw2f9h.execute-api.us-east-1.amazonaws.com/healt-check",
+    url: "https://l7c7jw2f9h.execute-api.us-east-1.amazonaws.com/health-check",
     method: "GET",
   },
 };
