@@ -1,23 +1,26 @@
 .InputText {
+  width: 100%;
   padding: 16px 20px;
   border-radius: 24px;
   box-shadow: 0 0 0 1px $grey-02;
-  width: 100%;
+  transition: 0.2s;
   font-size: 15px;
 
-  white-space: pre;
-  box-sizing: border-box;
-  overflow-x: auto;
+  &.disabled {
+    background-color: $grey-01;
+  }
 
-  transition: 0.2s;
-
-  &:focus {
+  &.focus {
     color: $high;
     box-shadow: 0 0 0 1px $high;
   }
 
-  &::placeholder {
-    font-size: 15px;
-    color: $low;
+  input {
+    width: 100%;
+
+    &::placeholder {
+      font-size: 15px;
+      color: $low;
+    }
   }
 }

@@ -16,7 +16,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function InputMic({ onAsk }: Props) {
-  const addMessage = useChatStore((s) => s.addMessage);
+  const { addMessage } = useChatStore((s) => s.actions);
 
   const {
     finalTranscript,

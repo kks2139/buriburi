@@ -14,7 +14,7 @@ function Entry() {
   const navigate = useNavigate();
 
   const selectedAiStyle = useAiStore((s) => s.selectedAiStyle);
-  const setAiStyle = useAiStore((s) => s.setAiStyle);
+  const { setAiStyle } = useAiStore((s) => s.actions);
 
   return (
     <div className={cn("Entry")}>

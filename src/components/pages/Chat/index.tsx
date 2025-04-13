@@ -13,7 +13,7 @@ const cn = classNames.bind(styles);
 
 function Chat() {
   const messages = useChatStore((s) => s.messages);
-  const initMessage = useChatStore((s) => s.initMessage);
+  const { initMessage } = useChatStore((s) => s.actions);
 
   useEffect(() => {
     if (!messages.length) {

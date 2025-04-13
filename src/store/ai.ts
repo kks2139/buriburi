@@ -82,29 +82,33 @@ export const AI_INFO: Record<CoachType, CoachInfo> = {
 interface AiStore {
   selectedAiStyle: Set<AiStyle>;
   selectedCoach?: CoachType;
-  setAiStyle: (style: AiStyle) => void;
-  setSelectedCoach: (coach: CoachType) => void;
+  actions: {
+    setAiStyle: (style: AiStyle) => void;
+    setSelectedCoach: (coach: CoachType) => void;
+  };
 }
 
 export const useAiStore = create<AiStore>()(
   immer((set, get) => ({
     selectedAiStyle: new Set<AiStyle>(),
     selectedCoach: undefined,
-    setAiStyle: (style) => {
-      const { selectedAiStyle } = get();
+    actions: {
+      setAiStyle: (style) => {
+        const { selectedAiStyle } = get();
 
-      set((state) => {
-        if (selectedAiStyle.has(style)) {
-          state.selectedAiStyle.delete(style);
-        } else {
-          state.selectedAiStyle.add(style);
-        }
-      });
-    },
-    setSelectedCoach: (coach) => {
-      set((state) => {
-        state.selectedCoach = coach;
-      });
+        set((state) => {
+          if (selectedAiStyle.has(style)) {
+            state.selectedAiStyle.delete(style);
+          } else {
+            state.selectedAiStyle.add(style);
+          }
+        });
+      },
+      setSelectedCoach: (coach) => {
+        set((state) => {
+          state.selectedCoach = coach;
+        });
+      },
     },
   })),
 );

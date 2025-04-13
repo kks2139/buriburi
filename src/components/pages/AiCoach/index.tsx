@@ -13,8 +13,8 @@ const cn = classNames.bind(styles);
 function AiCoach() {
   const navigate = useNavigate();
   const selectedCoach = useAiStore((s) => s.selectedCoach);
-  const setSelectedCoach = useAiStore((s) => s.setSelectedCoach);
-  const initMessage = useChatStore((s) => s.initMessage);
+  const { setSelectedCoach } = useAiStore((s) => s.actions);
+  const { initMessage } = useChatStore((s) => s.actions);
 
   const [isAiLoading, setIsAiLoading] = useState(true);
 
