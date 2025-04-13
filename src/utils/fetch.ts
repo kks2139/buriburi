@@ -25,11 +25,11 @@ export const fetchData = async <TResult, TData = Record<string, unknown>>({
 
   try {
     const res = await fetch(requestUrl, {
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache, nostore, max-age=0, must-revalidate",
-      },
+      // headers: {
+      //   Accept: "application/json, text/plain, */*",
+      //   "Content-Type": "application/json",
+      //   "Cache-Control": "no-cache, nostore, max-age=0, must-revalidate",
+      // },
       method,
       body: data ? JSON.stringify(data) : undefined,
     });
