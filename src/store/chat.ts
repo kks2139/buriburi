@@ -31,7 +31,7 @@ export const useChatStore = create<ChatStore>()(
     isQuerying: false,
     actions: {
       initMessage: (coach) => {
-        const isType1 = coach === "GLN";
+        const isType1 = coach === "LINA";
 
         set((state) => {
           state.messages = [
