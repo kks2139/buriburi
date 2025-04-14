@@ -34,7 +34,7 @@ function Message({
   const isAi = speaker === "AI";
   const profileImg =
     isAi && useProfileIcon
-      ? selectedCoach === "GLN"
+      ? selectedCoach === "LINA"
         ? ImgChatCoach1
         : ImgChatCoach2
       : null;
