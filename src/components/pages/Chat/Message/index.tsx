@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import ImgChatCoach1 from "@/assets/img/img-chat-coach-1.png";
 import ImgChatCoach2 from "@/assets/img/img-chat-coach-2.png";
 import Bubbling from "@/assets/lottie/bubbling.json";
+import { SuggestionBubble } from "@/hooks";
 import { useAiStore } from "@/store";
 import { Speaker } from "@/store/chat";
 
@@ -14,16 +15,18 @@ const cn = classNames.bind(styles);
 
 interface Porps {
   speaker: Speaker;
-  message: string;
-  suggestions?: { title: string; subTitle?: string }[];
-  onClickSuggestion?: (title: string, subTitle?: string) => void;
+  message?: string;
+  loadingMessage?: string;
+  suggestions?: SuggestionBubble[];
+  onClickSuggestion?: (value: SuggestionBubble) => void;
   isLoading?: boolean;
   useProfileIcon?: boolean;
 }
 
 function Message({
   speaker,
-  message,
+  message = "",
+  loadingMessage,
   suggestions = [],
   onClickSuggestion,
   isLoading,
@@ -59,27 +62,34 @@ function Message({
             />
           )}
 
-          <div className={cn("message-ai", { loading: isLoading })}>
-            <span dangerouslySetInnerHTML={{ __html: message }}></span>
+          <div className={cn("message-ai")}>
+            {message && (
+              <span dangerouslySetInnerHTML={{ __html: message }}></span>
+            )}
             {isLoading && (
-              <div className={cn("lottie")}>
-                <Lottie animationData={Bubbling} loop={true} />
+              <div className={cn("loading")}>
+                {loadingMessage && <div>{loadingMessage}</div>}
+                <div className={cn("lottie")}>
+                  <Lottie animationData={Bubbling} loop={true} />
+                </div>
               </div>
             )}
           </div>
 
           {suggestions.length > 0 && (
             <ul className={cn("suggestions")}>
-              {suggestions.map(({ title, subTitle }) => (
-                <li key={title + subTitle}>
+              {suggestions.map((suggestion) => (
+                <li key={suggestion.titleMessage + suggestion.subMessage}>
                   <button
                     type="button"
                     onClick={() => {
-                      onClickSuggestion?.(title, subTitle);
+                      onClickSuggestion?.(suggestion);
                     }}
                   >
-                    <div className={cn("title")}>{title}</div>
-                    <div className={cn("sub-title")}>{subTitle}</div>
+                    <div className={cn("title")}>{suggestion.titleMessage}</div>
+                    <div className={cn("sub-title")}>
+                      {suggestion.subMessage}
+                    </div>
                   </button>
                 </li>
               ))}

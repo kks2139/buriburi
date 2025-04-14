@@ -2,8 +2,7 @@ import classNames from "classnames/bind";
 import { useRef, useState } from "react";
 import { useSpeechRecognition } from "react-speech-recognition";
 
-import { useFetch } from "@/hooks";
-import { useChatStore } from "@/store";
+import { useAiStore, useChatStore } from "@/store";
 
 import InputMic from "../InputMic";
 import InputText from "../InputText";
@@ -13,9 +12,9 @@ const cn = classNames.bind(styles);
 
 function UserInput() {
   const { listening, transcript, resetTranscript } = useSpeechRecognition();
-  const { request } = useFetch({ skipErrorMessage: true });
 
-  const { setIsQuerying, addMessage } = useChatStore((s) => s.actions);
+  const selectedCoach = useAiStore((s) => s.selectedCoach) || "DRAGON";
+  const { queryToAi } = useChatStore((s) => s.actions);
 
   const [isInputfocused, setIsInputFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,41 +24,14 @@ function UserInput() {
     inputRef.current?.focus();
   };
 
-  const queryAi = async (text: string) => {
-    setIsQuerying(true);
-
-    const result = await request<{
-      statusCode: number;
-      body: string;
-      errorMessage?: string;
-    }>("loanNeedsAnalyzation", {
-      sessionId: "test123",
-      message: text,
-    });
-
-    setIsQuerying(false);
-
-    const errorMsg = "죄송해요 다시 질문해주세요!";
-
-    if (result) {
-      addMessage({
-        speaker: "AI",
-        message: result.errorMessage ? errorMsg : result.body,
-      });
-    } else {
-      addMessage({
-        speaker: "AI",
-        message: errorMsg,
-      });
-    }
-  };
-
   return (
     <div className={cn("UserInput", { listening })}>
       {!listening && (
         <InputText
           ref={inputRef}
-          onAsk={queryAi}
+          onAsk={(text) => {
+            queryToAi(text, selectedCoach);
+          }}
           isInputfocused={isInputfocused}
           setIsInputFocused={setIsInputFocused}
           focusInput={focusInput}
@@ -76,7 +48,7 @@ function UserInput() {
         ) : null}
         <InputMic
           onAsk={(text) => {
-            queryAi(text);
+            queryToAi(text, selectedCoach);
             resetTranscript();
             focusInput();
           }}

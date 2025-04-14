@@ -1,3 +1,6 @@
+import camelcaseKeys from "camelcase-keys";
+import snakecaseKeys from "snakecase-keys";
+
 export type Method = "GET" | "POST";
 
 export interface FetchOptions<T = Record<string, unknown>> {
@@ -31,15 +34,21 @@ export const fetchData = async <TResult, TData = Record<string, unknown>>({
         "Cache-Control": "no-cache, nostore, max-age=0, must-revalidate",
       },
       method,
-      body: data ? JSON.stringify(data) : undefined,
+      body: data
+        ? JSON.stringify(snakecaseKeys(data, { deep: true }))
+        : undefined,
     });
 
     if (res.ok) {
-      return (await res.json()) as TResult;
+      const result = await res.json();
+
+      return camelcaseKeys(result, { deep: true }) as TResult;
     } else {
       handleError(skipErrorMessage);
     }
-  } catch {
+  } catch (e) {
+    console.log(e);
+
     handleError(skipErrorMessage);
   }
 };

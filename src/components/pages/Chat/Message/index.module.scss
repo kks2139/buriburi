@@ -2,11 +2,12 @@
   padding: 10px 14px;
   border-radius: 16px;
   background-color: $grey-01;
-  max-width: 310px;
+  max-width: 290px;
 }
 
+$default-font-size: 16px;
+
 .Message {
-  font-size: 16px;
   line-height: 26px;
 
   &.show-on-right {
@@ -19,26 +20,28 @@
   }
 
   .message-ai {
+    font-size: $default-font-size;
     padding: 16px 0 24px 0;
-    max-width: 320px;
+    max-width: 290px;
 
-    &.loading {
+    .loading {
       font-size: 13px;
       color: $medium;
       display: flex;
       align-items: center;
-    }
 
-    .lottie {
-      display: flex;
-      width: 30px;
-      margin-left: 6px;
+      .lottie {
+        display: flex;
+        width: 30px;
+        margin-left: 6px;
+      }
     }
   }
 
   .message-user {
     @include gray-box;
     margin-bottom: 8px;
+    font-size: $default-font-size;
   }
 
   .suggestions {
@@ -66,15 +69,6 @@
     .sub-title {
       font-size: 13px;
       color: $medium;
-    }
-  }
-
-  @keyframes gradientMove {
-    0% {
-      background-position: 0% center;
-    }
-    100% {
-      background-position: 100% center;
     }
   }
 }

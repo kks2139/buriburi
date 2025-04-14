@@ -1,32 +1,88 @@
 import { useCallback, useState } from "react";
 
+import { CoachType } from "@/store";
 import { fetchData, FetchOptions } from "@/utils";
 
-type ApiKey = "healthCheck" | "loanNeedsAnalyzation" | "selectCounselor";
+export type ApiKey =
+  | "healthCheck"
+  | "selectCounselor"
+  | "loanNeedsAnalyzation"
+  | "fetchFinanceAsset"
+  | "inquryInterestRateLimit"
+  | "summaryInquiryResult"
+  | "continueFromLast";
+
+export type LoanNeedsAnalyzationStatus =
+  | "ANALYZE_LOAN_NEEDS"
+  | "READY_TO_FETCH_FINANCE_ASSET"
+  | "READY_TO_INQUIRY_LOAN"
+  | "CONTINUE_FROM_LAST_STATUS"
+  | "LOAN_INQUIRY_COMPLETED";
+
+export type SuggestionActionType =
+  | "VIEW_INQUIRY_RESULT"
+  | "RESULT_SUMMARY"
+  | "READY_TO_INQUIRY"
+  | "CONTINUE_FROM_LAST"
+  | "RESET_QUESTION"
+  | "READY_TO_FETCH_ASSET";
+
+export interface SuggestionBubble {
+  actionType?: SuggestionActionType;
+  titleMessage: string;
+  subMessage: string;
+}
+
+export interface LoanNeedsAnalyzationResponse {
+  outputBody: string;
+  status: LoanNeedsAnalyzationStatus;
+  errorMessage?: string;
+  suggestions?: SuggestionBubble[];
+}
+
+export interface LoanNeedsAnalyzationRequest {
+  sessionId: string;
+  message: string;
+  counselorType: CoachType;
+  status: LoanNeedsAnalyzationStatus;
+}
+
+export let sessionId = 1;
+
+export const updateSessionId = () => ++sessionId;
 
 const BASE_URL = "https://l7c7jw2f9h.execute-api.us-east-1.amazonaws.com";
 
-const apiInfo: Record<ApiKey, Pick<FetchOptions, "url" | "method">> = {
+export const apiInfo: Record<ApiKey, Pick<FetchOptions, "url" | "method">> = {
   healthCheck: {
     url: `${BASE_URL}/health-check`,
     method: "GET",
-  },
-  loanNeedsAnalyzation: {
-    url: `${BASE_URL}/loan-needs-analyzation`,
-    method: "POST",
   },
   selectCounselor: {
     url: `${BASE_URL}/select-counselor`,
     method: "POST",
   },
+  loanNeedsAnalyzation: {
+    url: `${BASE_URL}/loan-needs-analyzation`,
+    method: "POST",
+  },
+  fetchFinanceAsset: {
+    url: `${BASE_URL}/fetch-finance-asset`,
+    method: "POST",
+  },
+  inquryInterestRateLimit: {
+    url: `${BASE_URL}/inquiry-interest-rate-limit`,
+    method: "POST",
+  },
+  summaryInquiryResult: {
+    url: `${BASE_URL}/summary-inquiry-result`,
+    method: "POST",
+  },
+  continueFromLast: {
+    url: `${BASE_URL}/continue-from-last`,
+    method: "GET",
+  },
 };
-
-// body:
-// types -> string[]
-
-// res:
-// type
-// name
 
 interface Options {
   skipErrorMessage?: boolean;

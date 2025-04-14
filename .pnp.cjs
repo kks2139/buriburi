@@ -32,6 +32,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/react-speech-recognition", "npm:3.9.6"],\
           ["@vitejs/plugin-react-swc", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:3.7.0"],\
+          ["camelcase-keys", "npm:9.1.3"],\
           ["classnames", "npm:2.5.1"],\
           ["eslint", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:9.9.0"],\
           ["eslint-config-prettier", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:9.1.0"],\
@@ -44,6 +45,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:15.9.0"],\
           ["immer", "npm:10.1.1"],\
           ["lottie-react", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:2.4.1"],\
+          ["marked", "npm:15.0.8"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"],\
@@ -51,6 +53,7 @@ const RAW_RUNTIME_STATE =
           ["react-speech-recognition", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:4.0.0"],\
           ["react-text-to-speech", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:1.4.3"],\
           ["sass-embedded", "npm:1.77.8"],\
+          ["snakecase-keys", "npm:8.0.1"],\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"],\
           ["typescript-eslint", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:8.1.0"],\
           ["vite", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:5.4.1"],\
@@ -1835,6 +1838,26 @@ const RAW_RUNTIME_STATE =
           ["camelcase", "npm:6.3.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:8.0.0", {\
+        "packageLocation": "./.yarn/cache/camelcase-npm-8.0.0-a3fa03dcc3-56c5fe072f.zip/node_modules/camelcase/",\
+        "packageDependencies": [\
+          ["camelcase", "npm:8.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["camelcase-keys", [\
+      ["npm:9.1.3", {\
+        "packageLocation": "./.yarn/cache/camelcase-keys-npm-9.1.3-718ad4b12e-ed8cb24f4b.zip/node_modules/camelcase-keys/",\
+        "packageDependencies": [\
+          ["camelcase-keys", "npm:9.1.3"],\
+          ["camelcase", "npm:8.0.0"],\
+          ["map-obj", "npm:5.0.0"],\
+          ["quick-lru", "npm:6.1.2"],\
+          ["type-fest", "npm:4.39.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["caniuse-lite", [\
@@ -3099,6 +3122,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/react-speech-recognition", "npm:3.9.6"],\
           ["@vitejs/plugin-react-swc", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:3.7.0"],\
+          ["camelcase-keys", "npm:9.1.3"],\
           ["classnames", "npm:2.5.1"],\
           ["eslint", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:9.9.0"],\
           ["eslint-config-prettier", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:9.1.0"],\
@@ -3111,6 +3135,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:15.9.0"],\
           ["immer", "npm:10.1.1"],\
           ["lottie-react", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:2.4.1"],\
+          ["marked", "npm:15.0.8"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"],\
@@ -3118,6 +3143,7 @@ const RAW_RUNTIME_STATE =
           ["react-speech-recognition", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:4.0.0"],\
           ["react-text-to-speech", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:1.4.3"],\
           ["sass-embedded", "npm:1.77.8"],\
+          ["snakecase-keys", "npm:8.0.1"],\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"],\
           ["typescript-eslint", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:8.1.0"],\
           ["vite", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:5.4.1"],\
@@ -3246,6 +3272,31 @@ const RAW_RUNTIME_STATE =
           ["proc-log", "npm:4.2.0"],\
           ["promise-retry", "npm:2.0.1"],\
           ["ssri", "npm:10.0.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["map-obj", [\
+      ["npm:4.3.0", {\
+        "packageLocation": "./.yarn/cache/map-obj-npm-4.3.0-d53e32935d-1c19e1c885.zip/node_modules/map-obj/",\
+        "packageDependencies": [\
+          ["map-obj", "npm:4.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:5.0.0", {\
+        "packageLocation": "./.yarn/cache/map-obj-npm-5.0.0-71c70b509b-8ae0d8a3ce.zip/node_modules/map-obj/",\
+        "packageDependencies": [\
+          ["map-obj", "npm:5.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["marked", [\
+      ["npm:15.0.8", {\
+        "packageLocation": "./.yarn/cache/marked-npm-15.0.8-9c72cb3e01-79c4958047.zip/node_modules/marked/",\
+        "packageDependencies": [\
+          ["marked", "npm:15.0.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3717,6 +3768,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/queue-microtask-npm-1.2.3-fcc98e4e2d-900a93d3cd.zip/node_modules/queue-microtask/",\
         "packageDependencies": [\
           ["queue-microtask", "npm:1.2.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["quick-lru", [\
+      ["npm:6.1.2", {\
+        "packageLocation": "./.yarn/cache/quick-lru-npm-6.1.2-1e676e863f-f499f07bd2.zip/node_modules/quick-lru/",\
+        "packageDependencies": [\
+          ["quick-lru", "npm:6.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4220,6 +4280,18 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["snakecase-keys", [\
+      ["npm:8.0.1", {\
+        "packageLocation": "./.yarn/cache/snakecase-keys-npm-8.0.1-a876c9a7e3-3615126462.zip/node_modules/snakecase-keys/",\
+        "packageDependencies": [\
+          ["snakecase-keys", "npm:8.0.1"],\
+          ["map-obj", "npm:4.3.0"],\
+          ["snake-case", "npm:3.0.4"],\
+          ["type-fest", "npm:4.39.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["socks", [\
       ["npm:2.8.3", {\
         "packageLocation": "./.yarn/cache/socks-npm-2.8.3-3532b59899-d54a52bf93.zip/node_modules/socks/",\
@@ -4480,6 +4552,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["type-check", "npm:0.4.0"],\
           ["prelude-ls", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["type-fest", [\
+      ["npm:4.39.1", {\
+        "packageLocation": "./.yarn/cache/type-fest-npm-4.39.1-227092867f-f5bf302eb2.zip/node_modules/type-fest/",\
+        "packageDependencies": [\
+          ["type-fest", "npm:4.39.1"]\
         ],\
         "linkType": "HARD"\
       }]\
