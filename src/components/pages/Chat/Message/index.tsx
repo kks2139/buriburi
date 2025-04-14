@@ -60,7 +60,7 @@ function Message({
           )}
 
           <div className={cn("message-ai", { loading: isLoading })}>
-            <span>{message}</span>
+            <span dangerouslySetInnerHTML={{ __html: message }}></span>
             {isLoading && (
               <div className={cn("lottie")}>
                 <Lottie animationData={Bubbling} loop={true} />

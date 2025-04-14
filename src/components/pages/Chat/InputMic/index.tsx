@@ -16,6 +16,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function InputMic({ onAsk, ...rest }: Props) {
+  const isQuerying = useChatStore((s) => s.isQuerying);
   const inputTextValue = useChatStore((s) => s.inputTextValue);
   const { addMessage, setInputTextValue } = useChatStore((s) => s.actions);
 
@@ -49,7 +50,7 @@ function InputMic({ onAsk, ...rest }: Props) {
       {...rest}
       className={cn("InputMic", { highlight: isReadyToAsk || listening })}
       onClick={() => {
-        if (isReadyToAsk) {
+        if (isReadyToAsk && !isQuerying) {
           pushMessage();
           onAsk(inputValue);
 

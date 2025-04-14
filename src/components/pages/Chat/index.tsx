@@ -15,8 +15,6 @@ function Chat() {
   const isQuerying = useChatStore((s) => s.isQuerying);
   const { initMessage } = useChatStore((s) => s.actions);
 
-  console.log(11, isQuerying);
-
   useEffect(() => {
     if (!messages.length) {
       initMessage();

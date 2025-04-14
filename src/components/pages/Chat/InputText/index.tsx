@@ -22,13 +22,17 @@ function InputText({ onAsk, placeholder = "내용을 입력하세요" }: Props) 
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const focus = () => {
+    setFocused(true);
+    inputRef.current?.focus();
+  };
+
   return (
     <div
       className={cn("InputText", { focus: focused, disabled: listening })}
       tabIndex={-1}
       onFocus={() => {
-        setFocused(true);
-        inputRef.current?.focus();
+        focus();
       }}
     >
       <input
@@ -49,6 +53,8 @@ function InputText({ onAsk, placeholder = "내용을 입력하세요" }: Props) 
             setInputTextValue("");
 
             onAsk(inputTextValue);
+
+            focus();
           }
         }}
         onFocus={() => setFocused(true)}
