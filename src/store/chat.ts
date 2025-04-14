@@ -14,21 +14,22 @@ interface MessageInfo {
 
 interface ChatStore {
   messages: MessageInfo[];
+  inputTextValue: string;
+  isQuerying: boolean;
   actions: {
-    addMessage: (info: Omit<MessageInfo, "id">) => void;
     initMessage: (coach?: CoachType) => void;
+    addMessage: (info: Omit<MessageInfo, "id">) => void;
+    setInputTextValue: (value: string) => void;
+    setIsQuerying: (value: boolean) => void;
   };
 }
 
 export const useChatStore = create<ChatStore>()(
   immer((set) => ({
     messages: [],
+    inputTextValue: "",
+    isQuerying: false,
     actions: {
-      addMessage: (info) => {
-        set((state) => {
-          state.messages.push({ ...info, id: Date.now() });
-        });
-      },
       initMessage: (coach) => {
         const isType1 = coach === "GLN";
 
@@ -56,6 +57,21 @@ export const useChatStore = create<ChatStore>()(
               ],
             },
           ];
+        });
+      },
+      addMessage: (info) => {
+        set((state) => {
+          state.messages.push({ ...info, id: Date.now() });
+        });
+      },
+      setInputTextValue: (value: string) => {
+        set((state) => {
+          state.inputTextValue = value;
+        });
+      },
+      setIsQuerying: (value) => {
+        set((state) => {
+          state.isQuerying = value;
         });
       },
     },

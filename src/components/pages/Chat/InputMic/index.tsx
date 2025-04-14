@@ -1,10 +1,10 @@
 import classNames from "classnames/bind";
-import { ButtonHTMLAttributes, useEffect } from "react";
+import { ButtonHTMLAttributes } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-import { Mic } from "@/assets/svg";
+import { ArrowUp, Mic, SvgSoundVive } from "@/assets/svg";
 import { useChatStore } from "@/store";
 
 import styles from "./index.module.scss";
@@ -12,39 +12,56 @@ import styles from "./index.module.scss";
 const cn = classNames.bind(styles);
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  onAsk?: (text: string) => void;
+  onAsk: (text: string) => void;
 }
 
-function InputMic({ onAsk }: Props) {
-  const { addMessage } = useChatStore((s) => s.actions);
+function InputMic({ onAsk, ...rest }: Props) {
+  const inputTextValue = useChatStore((s) => s.inputTextValue);
+  const { addMessage, setInputTextValue } = useChatStore((s) => s.actions);
 
   const {
-    finalTranscript,
+    transcript,
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
 
-  useEffect(() => {
-    if (finalTranscript) {
-      addMessage({ speaker: "USER", message: finalTranscript });
-      resetTranscript();
+  const isReadyToAsk = !!inputTextValue || (listening && transcript);
+  const inputValue = listening ? transcript : inputTextValue;
 
-      onAsk?.(finalTranscript);
-    }
-  }, [addMessage, finalTranscript, onAsk, resetTranscript]);
+  const stopListening = () => {
+    SpeechRecognition.stopListening();
+    resetTranscript();
+  };
+
+  const pushMessage = () => {
+    addMessage({
+      speaker: "USER",
+      message: inputValue,
+    });
+
+    resetTranscript();
+    setInputTextValue("");
+  };
 
   return (
     <button
-      className={cn("InputMic", { listening })}
+      {...rest}
+      className={cn("InputMic", { highlight: isReadyToAsk || listening })}
       onClick={() => {
+        if (isReadyToAsk) {
+          pushMessage();
+          onAsk(inputValue);
+
+          return;
+        }
+
         if (!browserSupportsSpeechRecognition) {
           return;
         }
 
         if (listening) {
-          SpeechRecognition.stopListening();
-          resetTranscript();
+          stopListening();
         } else {
           SpeechRecognition.startListening({
             continuous: true,
@@ -54,7 +71,13 @@ function InputMic({ onAsk }: Props) {
       }}
     >
       <div className={cn("icon")}>
-        <Mic width={18} height={18} />
+        {isReadyToAsk ? (
+          <ArrowUp width={18} height={18} />
+        ) : listening ? (
+          <SvgSoundVive width={18} height={18} />
+        ) : (
+          <Mic width={18} height={18} />
+        )}
       </div>
     </button>
   );

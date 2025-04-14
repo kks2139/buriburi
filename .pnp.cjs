@@ -43,6 +43,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:12.6.3"],\
           ["globals", "npm:15.9.0"],\
           ["immer", "npm:10.1.1"],\
+          ["lottie-react", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:2.4.1"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"],\
@@ -3109,6 +3110,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:12.6.3"],\
           ["globals", "npm:15.9.0"],\
           ["immer", "npm:10.1.1"],\
+          ["lottie-react", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:2.4.1"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"],\
@@ -3160,6 +3162,42 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["loose-envify", "npm:1.4.0"],\
           ["js-tokens", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lottie-react", [\
+      ["npm:2.4.1", {\
+        "packageLocation": "./.yarn/cache/lottie-react-npm-2.4.1-91badf61e2-7f6a0a2cf2.zip/node_modules/lottie-react/",\
+        "packageDependencies": [\
+          ["lottie-react", "npm:2.4.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:2.4.1", {\
+        "packageLocation": "./.yarn/__virtual__/lottie-react-virtual-5f4e804341/0/cache/lottie-react-npm-2.4.1-91badf61e2-7f6a0a2cf2.zip/node_modules/lottie-react/",\
+        "packageDependencies": [\
+          ["lottie-react", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:2.4.1"],\
+          ["@types/react", "npm:18.3.3"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["lottie-web", "npm:5.12.2"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:0e0b7e5101e10582003427be0212ae977f1e6aba4e5a311505dacd29197226720084ba3acc6bff13dc01239d6c8afa6e9e067a77b7462ee1dab3870db11c2ca5#npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lottie-web", [\
+      ["npm:5.12.2", {\
+        "packageLocation": "./.yarn/cache/lottie-web-npm-5.12.2-942dc9e22a-0aeaf631b1.zip/node_modules/lottie-web/",\
+        "packageDependencies": [\
+          ["lottie-web", "npm:5.12.2"]\
         ],\
         "linkType": "HARD"\
       }]\

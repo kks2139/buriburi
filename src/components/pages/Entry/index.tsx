@@ -14,7 +14,9 @@ function Entry() {
   const navigate = useNavigate();
 
   const selectedAiStyle = useAiStore((s) => s.selectedAiStyle);
-  const { setAiStyle } = useAiStore((s) => s.actions);
+  const { setAiStyle, setSelectedCoach } = useAiStore((s) => s.actions);
+
+  console.log(Array.from(selectedAiStyle));
 
   return (
     <div className={cn("Entry")}>
@@ -42,7 +44,20 @@ function Entry() {
             exit={{ opacity: 0, transform: "translateY(10px)" }}
             transition={{ duration: 0.2 }}
           >
-            <Button fullSize onClick={() => navigate("/ai-coach")}>
+            <Button
+              fullSize
+              onClick={() => {
+                if (
+                  selectedAiStyle.has("따뜻한") ||
+                  selectedAiStyle.has("공감형") ||
+                  selectedAiStyle.has("차분한")
+                ) {
+                  setSelectedCoach("GLN");
+                }
+
+                navigate("/ai-coach");
+              }}
+            >
               대출코치 만나기
             </Button>
           </motion.div>

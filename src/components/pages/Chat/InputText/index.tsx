@@ -2,7 +2,6 @@ import classNames from "classnames/bind";
 import { InputHTMLAttributes, useRef, useState } from "react";
 import { useSpeechRecognition } from "react-speech-recognition";
 
-import { useFetch } from "@/hooks";
 import { useChatStore } from "@/store";
 
 import styles from "./index.module.scss";
@@ -10,26 +9,18 @@ import styles from "./index.module.scss";
 const cn = classNames.bind(styles);
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  onAsk?: (text: string) => void;
+  onAsk: (text: string) => void;
 }
 
-function InputText({ placeholder = "내용을 입력하세요" }: Props) {
-  const { addMessage } = useChatStore((s) => s.actions);
-  const { listening } = useSpeechRecognition();
-  const { request, isFetching } = useFetch({ skipErrorMessage: true });
+function InputText({ onAsk, placeholder = "내용을 입력하세요" }: Props) {
+  const inputTextValue = useChatStore((s) => s.inputTextValue);
+  const { addMessage, setInputTextValue } = useChatStore((s) => s.actions);
 
-  const [inputValue, setInputValue] = useState("");
+  const { listening } = useSpeechRecognition();
+
   const [focused, setFocused] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const queryAi = async () => {
-    const result = await request("healthCheck");
-
-    console.log("result: ", result);
-  };
-
-  console.log("isFetching:", isFetching);
 
   return (
     <div
@@ -44,20 +35,20 @@ function InputText({ placeholder = "내용을 입력하세요" }: Props) {
         ref={inputRef}
         disabled={listening}
         placeholder={placeholder}
-        value={inputValue}
+        value={inputTextValue}
         onChange={(e) => {
-          setInputValue(e.target.value);
+          setInputTextValue(e.target.value);
         }}
         onKeyDown={(e) => {
-          if (!inputValue.trim()) {
+          if (!inputTextValue.trim()) {
             return;
           }
 
           if (e.key === "Enter") {
-            addMessage({ speaker: "USER", message: inputValue });
-            setInputValue("");
+            addMessage({ speaker: "USER", message: inputTextValue });
+            setInputTextValue("");
 
-            queryAi();
+            onAsk(inputTextValue);
           }
         }}
         onFocus={() => setFocused(true)}

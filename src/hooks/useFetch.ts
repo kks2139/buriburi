@@ -6,7 +6,7 @@ type ApiKey = "queryAi" | "healthCheck";
 
 const apiInfo: Record<ApiKey, Pick<FetchOptions, "url" | "method">> = {
   queryAi: {
-    url: "",
+    url: "https://l7c7jw2f9h.execute-api.us-east-1.amazonaws.com/loan-needs-analyzation",
     method: "POST",
   },
   healthCheck: {
@@ -23,12 +23,16 @@ export const useFetch = ({ skipErrorMessage }: Options = {}) => {
   const [isFetching, setIsFetching] = useState(false);
 
   const request = useCallback(
-    async <T>(apiKey: ApiKey) => {
+    async <TResult, TData = Record<string, unknown>>(
+      apiKey: ApiKey,
+      data?: TData,
+    ) => {
       setIsFetching(true);
 
-      const result = await fetchData<T>({
+      const result = await fetchData<TResult, TData>({
         url: apiInfo[apiKey].url,
         method: apiInfo[apiKey].method,
+        data,
         skipErrorMessage,
       });
 

@@ -24,7 +24,7 @@ function AiCoach() {
   useEffect(() => {
     (async () => {
       // TODO: AI타입 api?
-      await new Promise((res) => setTimeout(res, 1000));
+      await new Promise((res) => setTimeout(res, 3000));
 
       const coach: CoachType = Date.now() % 2 === 0 ? "GLN" : "SYC";
 

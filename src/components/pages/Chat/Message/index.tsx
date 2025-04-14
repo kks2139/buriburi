@@ -1,8 +1,10 @@
 import classNames from "classnames/bind";
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
 
 import ImgChatCoach1 from "@/assets/img/img-chat-coach-1.png";
 import ImgChatCoach2 from "@/assets/img/img-chat-coach-2.png";
+import Bubbling from "@/assets/lottie/bubbling.json";
 import { useAiStore } from "@/store";
 import { Speaker } from "@/store/chat";
 
@@ -15,6 +17,8 @@ interface Porps {
   message: string;
   suggestions?: { title: string; subTitle?: string }[];
   onClickSuggestion?: (title: string, subTitle?: string) => void;
+  isLoading?: boolean;
+  useProfileIcon?: boolean;
 }
 
 function Message({
@@ -22,15 +26,18 @@ function Message({
   message,
   suggestions = [],
   onClickSuggestion,
+  isLoading,
+  useProfileIcon,
 }: Porps) {
   const selectedCoach = useAiStore((s) => s.selectedCoach);
 
   const isAi = speaker === "AI";
-  const profileImg = isAi
-    ? selectedCoach === "GLN"
-      ? ImgChatCoach1
-      : ImgChatCoach2
-    : null;
+  const profileImg =
+    isAi && useProfileIcon
+      ? selectedCoach === "GLN"
+        ? ImgChatCoach1
+        : ImgChatCoach2
+      : null;
 
   return (
     <motion.li
@@ -51,7 +58,16 @@ function Message({
               height={60}
             />
           )}
-          <div className={cn("message-ai")}>{message}</div>
+
+          <div className={cn("message-ai", { loading: isLoading })}>
+            <span>{message}</span>
+            {isLoading && (
+              <div className={cn("lottie")}>
+                <Lottie animationData={Bubbling} loop={true} />
+              </div>
+            )}
+          </div>
+
           {suggestions.length > 0 && (
             <ul className={cn("suggestions")}>
               {suggestions.map(({ title, subTitle }) => (

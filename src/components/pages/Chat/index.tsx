@@ -5,15 +5,17 @@ import { useEffect } from "react";
 import { useChatStore } from "@/store";
 
 import styles from "./index.module.scss";
-import InputMic from "./InputMic";
-import InputText from "./InputText";
 import Message from "./Message";
+import UserInput from "./UserInput";
 
 const cn = classNames.bind(styles);
 
 function Chat() {
   const messages = useChatStore((s) => s.messages);
+  const isQuerying = useChatStore((s) => s.isQuerying);
   const { initMessage } = useChatStore((s) => s.actions);
+
+  console.log(11, isQuerying);
 
   useEffect(() => {
     if (!messages.length) {
@@ -34,6 +36,7 @@ function Chat() {
           {messages.map(({ id, speaker, message, suggestions }) => (
             <Message
               key={id}
+              useProfileIcon
               speaker={speaker}
               message={message}
               suggestions={suggestions}
@@ -43,13 +46,13 @@ function Chat() {
               }}
             />
           ))}
+          {isQuerying && (
+            <Message speaker="AI" message="생각중이에요" isLoading />
+          )}
         </AnimatePresence>
       </ul>
 
-      <div className={cn("input-container")}>
-        <InputText />
-        <InputMic />
-      </div>
+      <UserInput />
     </main>
   );
 }

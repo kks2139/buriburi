@@ -21,6 +21,20 @@
   .message-ai {
     padding: 16px 0 24px 0;
     max-width: 320px;
+
+    &.loading {
+      font-size: 13px;
+      color: $medium;
+      display: flex;
+      align-items: center;
+    }
+
+    .lottie {
+      display: flex;
+      width: 30px;
+      // height: 15px;
+      margin-left: 6px;
+    }
   }
 
   .message-user {
@@ -53,6 +67,15 @@
     .sub-title {
       font-size: 13px;
       color: $medium;
+    }
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 100% center;
     }
   }
 }
