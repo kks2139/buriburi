@@ -16,8 +16,6 @@ function Entry() {
   const selectedAiStyle = useAiStore((s) => s.selectedAiStyle);
   const { setAiStyle, setSelectedCoach } = useAiStore((s) => s.actions);
 
-  console.log(Array.from(selectedAiStyle));
-
   return (
     <div className={cn("Entry")}>
       <h2 className={cn("title")}>{"대출코치가 어떻게\n말하면 좋을까요?"}</h2>
@@ -47,14 +45,7 @@ function Entry() {
             <Button
               fullSize
               onClick={() => {
-                if (
-                  selectedAiStyle.has("따뜻한") ||
-                  selectedAiStyle.has("공감형") ||
-                  selectedAiStyle.has("차분한")
-                ) {
-                  setSelectedCoach("GLN");
-                }
-
+                setSelectedCoach(undefined);
                 navigate("/ai-coach");
               }}
             >

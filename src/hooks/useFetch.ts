@@ -2,18 +2,31 @@ import { useCallback, useState } from "react";
 
 import { fetchData, FetchOptions } from "@/utils";
 
-type ApiKey = "queryAi" | "healthCheck";
+type ApiKey = "healthCheck" | "loanNeedsAnalyzation" | "selectCounselor";
+
+const BASE_URL = "https://l7c7jw2f9h.execute-api.us-east-1.amazonaws.com";
 
 const apiInfo: Record<ApiKey, Pick<FetchOptions, "url" | "method">> = {
-  queryAi: {
-    url: "https://l7c7jw2f9h.execute-api.us-east-1.amazonaws.com/loan-needs-analyzation",
-    method: "POST",
-  },
   healthCheck: {
-    url: "https://l7c7jw2f9h.execute-api.us-east-1.amazonaws.com/health-check",
+    url: `${BASE_URL}/health-check`,
     method: "GET",
   },
+  loanNeedsAnalyzation: {
+    url: `${BASE_URL}/loan-needs-analyzation`,
+    method: "POST",
+  },
+  selectCounselor: {
+    url: `${BASE_URL}/select-counselor`,
+    method: "POST",
+  },
 };
+
+// body:
+// types -> string[]
+
+// res:
+// type
+// name
 
 interface Options {
   skipErrorMessage?: boolean;

@@ -29,7 +29,7 @@ export const AI_STYLES: AiStyle[] = [
   "경험자",
 ];
 
-export type CoachType = "GLN" | "SYC";
+export type CoachType = "LINA" | "DRAGON";
 
 interface CoachInfo {
   name: string;
@@ -41,7 +41,7 @@ interface CoachInfo {
 }
 
 export const AI_INFO: Record<CoachType, CoachInfo> = {
-  GLN: {
+  LINA: {
     name: "금리나",
     age: 34,
     spec: [
@@ -59,7 +59,7 @@ export const AI_INFO: Record<CoachType, CoachInfo> = {
       },
     ],
   },
-  SYC: {
+  DRAGON: {
     name: "신용철",
     age: 30,
     spec: [
@@ -84,7 +84,7 @@ interface AiStore {
   selectedCoach?: CoachType;
   actions: {
     setAiStyle: (style: AiStyle) => void;
-    setSelectedCoach: (coach: CoachType) => void;
+    setSelectedCoach: (coach: CoachType | undefined) => void;
   };
 }
 

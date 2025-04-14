@@ -19,18 +19,29 @@ function UserInput() {
   const queryAi = async (text: string) => {
     setIsQuerying(true);
 
-    const result = await request<{ statusCode: number; body: string }>(
-      "queryAi",
-      {
-        sessionId: "test123",
-        message: text,
-      },
-    );
+    const result = await request<{
+      statusCode: number;
+      body: string;
+      errorMessage?: string;
+    }>("loanNeedsAnalyzation", {
+      sessionId: "test123",
+      message: text,
+    });
 
     setIsQuerying(false);
 
+    const errorMsg = "죄송해요 다시 질문해주세요!";
+
     if (result) {
-      addMessage({ speaker: "AI", message: result.body });
+      addMessage({
+        speaker: "AI",
+        message: result.errorMessage ? errorMsg : result.body,
+      });
+    } else {
+      addMessage({
+        speaker: "AI",
+        message: errorMsg,
+      });
     }
   };
 

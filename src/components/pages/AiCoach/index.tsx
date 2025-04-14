@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
+import { useFetch } from "@/hooks";
 import { AI_INFO, CoachType, useAiStore, useChatStore } from "@/store";
 
 import styles from "./index.module.scss";
@@ -12,30 +13,44 @@ const cn = classNames.bind(styles);
 
 function AiCoach() {
   const navigate = useNavigate();
+  const selectedAiStyle = useAiStore((s) => s.selectedAiStyle);
   const selectedCoach = useAiStore((s) => s.selectedCoach);
   const { setSelectedCoach } = useAiStore((s) => s.actions);
   const { initMessage } = useChatStore((s) => s.actions);
 
-  const [isAiLoading, setIsAiLoading] = useState(true);
+  const { request } = useFetch();
 
-  const isType1 = selectedCoach === "GLN";
-  const aiInfo = isType1 ? AI_INFO.GLN : AI_INFO.SYC;
+  const [isSelectCoachLoading, setIsSelectCoachLoading] =
+    useState(!selectedCoach);
+
+  const isType1 = selectedCoach === "LINA";
+  const aiInfo = isType1 ? AI_INFO.LINA : AI_INFO.DRAGON;
 
   useEffect(() => {
     (async () => {
-      // TODO: AI타입 api?
-      await new Promise((res) => setTimeout(res, 3000));
+      if (selectedCoach) {
+        return;
+      }
 
-      const coach: CoachType = Date.now() % 2 === 0 ? "GLN" : "SYC";
+      const result = await request<{ type: CoachType; name: string }>(
+        "selectCounselor",
+        {
+          types: Array.from(selectedAiStyle),
+        },
+      );
 
-      setSelectedCoach(coach);
-      initMessage(coach);
+      setIsSelectCoachLoading(false);
 
-      setIsAiLoading(false);
+      if (!result) {
+        return;
+      }
+
+      setSelectedCoach(result.type);
+      initMessage(result.type);
     })();
-  }, [initMessage, setSelectedCoach]);
+  }, [initMessage, request, selectedAiStyle, selectedCoach, setSelectedCoach]);
 
-  if (isAiLoading) {
+  if (isSelectCoachLoading) {
     return <Loading />;
   }
 
