@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { useRef, useState } from "react";
 import { useSpeechRecognition } from "react-speech-recognition";
 
 import { useFetch } from "@/hooks";
@@ -15,6 +16,14 @@ function UserInput() {
   const { request } = useFetch({ skipErrorMessage: true });
 
   const { setIsQuerying, addMessage } = useChatStore((s) => s.actions);
+
+  const [isInputfocused, setIsInputFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const focusInput = () => {
+    setIsInputFocused(true);
+    inputRef.current?.focus();
+  };
 
   const queryAi = async (text: string) => {
     setIsQuerying(true);
@@ -47,7 +56,15 @@ function UserInput() {
 
   return (
     <div className={cn("UserInput", { listening })}>
-      {!listening && <InputText onAsk={queryAi} />}
+      {!listening && (
+        <InputText
+          ref={inputRef}
+          onAsk={queryAi}
+          isInputfocused={isInputfocused}
+          setIsInputFocused={setIsInputFocused}
+          focusInput={focusInput}
+        />
+      )}
 
       <div className={cn("mic", { listening })}>
         {listening ? (
@@ -61,6 +78,7 @@ function UserInput() {
           onAsk={(text) => {
             queryAi(text);
             resetTranscript();
+            focusInput();
           }}
         />
       </div>

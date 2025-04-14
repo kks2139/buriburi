@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { InputHTMLAttributes, useRef, useState } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 import { useSpeechRecognition } from "react-speech-recognition";
 
 import { useChatStore } from "@/store";
@@ -10,58 +10,67 @@ const cn = classNames.bind(styles);
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onAsk: (text: string) => void;
+  isInputfocused: boolean;
+  setIsInputFocused: (value: boolean) => void;
+  focusInput: () => void;
 }
 
-function InputText({ onAsk, placeholder = "내용을 입력하세요" }: Props) {
-  const inputTextValue = useChatStore((s) => s.inputTextValue);
-  const { addMessage, setInputTextValue } = useChatStore((s) => s.actions);
+const InputText = forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      placeholder = "내용을 입력하세요",
+      onAsk,
+      isInputfocused,
+      setIsInputFocused,
+      focusInput,
+    }: Props,
+    inputRef,
+  ) => {
+    const { addMessage, setInputTextValue } = useChatStore((s) => s.actions);
+    const inputTextValue = useChatStore((s) => s.inputTextValue);
+    const isQuerying = useChatStore((s) => s.isQuerying);
 
-  const { listening } = useSpeechRecognition();
+    const { listening } = useSpeechRecognition();
 
-  const [focused, setFocused] = useState(false);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const focus = () => {
-    setFocused(true);
-    inputRef.current?.focus();
-  };
-
-  return (
-    <div
-      className={cn("InputText", { focus: focused, disabled: listening })}
-      tabIndex={-1}
-      onFocus={() => {
-        focus();
-      }}
-    >
-      <input
-        ref={inputRef}
-        disabled={listening}
-        placeholder={placeholder}
-        value={inputTextValue}
-        onChange={(e) => {
-          setInputTextValue(e.target.value);
+    return (
+      <div
+        className={cn("InputText", {
+          focus: isInputfocused,
+          disabled: listening,
+        })}
+        tabIndex={-1}
+        onFocus={() => {
+          focusInput();
         }}
-        onKeyDown={(e) => {
-          if (!inputTextValue.trim()) {
-            return;
-          }
+      >
+        <input
+          ref={inputRef}
+          disabled={listening}
+          placeholder={placeholder}
+          value={inputTextValue}
+          onChange={(e) => {
+            setInputTextValue(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              if (!inputTextValue.trim() || isQuerying) {
+                return;
+              }
 
-          if (e.key === "Enter") {
-            addMessage({ speaker: "USER", message: inputTextValue });
-            setInputTextValue("");
+              addMessage({ speaker: "USER", message: inputTextValue });
+              setInputTextValue("");
 
-            onAsk(inputTextValue);
+              onAsk(inputTextValue);
 
-            focus();
-          }
-        }}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      />
-    </div>
-  );
-}
+              focusInput();
+            }
+          }}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
+        />
+      </div>
+    );
+  },
+);
 
 export default InputText;

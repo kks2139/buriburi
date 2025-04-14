@@ -50,7 +50,11 @@ function InputMic({ onAsk, ...rest }: Props) {
       {...rest}
       className={cn("InputMic", { highlight: isReadyToAsk || listening })}
       onClick={() => {
-        if (isReadyToAsk && !isQuerying) {
+        if (isReadyToAsk) {
+          if (isQuerying) {
+            return;
+          }
+
           pushMessage();
           onAsk(inputValue);
 
