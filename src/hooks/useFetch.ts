@@ -47,7 +47,7 @@ export interface LoanNeedsAnalyzationRequest {
   status: LoanNeedsAnalyzationStatus;
 }
 
-export let sessionId = 1;
+export let sessionId = Date.now();
 
 export const updateSessionId = () => ++sessionId;
 
