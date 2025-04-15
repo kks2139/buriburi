@@ -109,10 +109,12 @@ function Chat() {
                     });
 
                     setTimeout(() => {
+                      const isLina = selectedCoach === "LINA";
+
                       addMessage({
                         speaker: "AI",
                         meta: "address",
-                        message: `이사가는구나? 집 정보를 먼저 살펴보자.\n알아본 매물 주소를 ${selectedCoach === "LINA" ? "알려주시겠어요?" : "알려줘"}\n\n예시 : 경기도 성남시 분당구 백현동 12-34 번지`,
+                        message: `${isLina ? "이사가시나요?" : "이사가는구나?"} 집 정보를 먼저 ${isLina ? "살펴볼게요" : "살펴보자"}.\n알아본 매물 주소를 ${isLina ? "알려주시겠어요?" : "알려줘"}\n\n예시 : 경기도 성남시 분당구 백현동 12-34 번지`,
                       });
                     }, 500);
 
