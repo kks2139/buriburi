@@ -29,6 +29,7 @@ const InputText = forwardRef<HTMLInputElement, Props>(
     const { addMessage, setInputTextValue } = useChatStore((s) => s.actions);
     const inputTextValue = useChatStore((s) => s.inputTextValue);
     const isQuerying = useChatStore((s) => s.isQuerying);
+    const isJeonsePlanningMode = useChatStore((s) => s.isJeonsePlanningMode);
 
     const { listening } = useSpeechRecognition();
 
@@ -57,7 +58,10 @@ const InputText = forwardRef<HTMLInputElement, Props>(
                 return;
               }
 
-              addMessage({ speaker: "USER", message: inputTextValue });
+              if (!isJeonsePlanningMode) {
+                addMessage({ speaker: "USER", message: inputTextValue });
+              }
+
               setInputTextValue("");
 
               onAsk(inputTextValue);

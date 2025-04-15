@@ -31,6 +31,7 @@ interface ChatStore {
   isFinanceAssetLoading: boolean;
   isInquiryInterestRateLimitLoading: boolean;
   isJeonsePlanningLoading: boolean;
+  isJeonsePlanningMode: boolean;
   loanNeedsAnalyzationStatus: LoanNeedsAnalyzationStatus;
   actions: {
     initMessage: (coach?: CoachType) => void;
@@ -41,6 +42,7 @@ interface ChatStore {
     setIsFinanceAssetLoading: (value: boolean) => void;
     setIsInquiryInterestRateLimitLoading: (value: boolean) => void;
     setIsJeonsePlanningLoading: (value: boolean) => void;
+    setIsJeonsePlanningMode: (value: boolean) => void;
     setLoanNeedsAnalyzationStatus: (value: LoanNeedsAnalyzationStatus) => void;
     queryToAi: (
       message: string,
@@ -58,6 +60,7 @@ export const useChatStore = create<ChatStore>()(
     isFinanceAssetLoading: false,
     isInquiryInterestRateLimitLoading: false,
     isJeonsePlanningLoading: false,
+    isJeonsePlanningMode: false,
     loanNeedsAnalyzationStatus: "ANALYZE_LOAN_NEEDS",
     actions: {
       initMessage: (coach) => {
@@ -124,6 +127,11 @@ export const useChatStore = create<ChatStore>()(
       setIsJeonsePlanningLoading: (value) => {
         set((state) => {
           state.isJeonsePlanningLoading = value;
+        });
+      },
+      setIsJeonsePlanningMode: (value) => {
+        set((state) => {
+          state.isJeonsePlanningMode = value;
         });
       },
       setLoanNeedsAnalyzationStatus: (value) => {

@@ -14,10 +14,30 @@ function UserInput() {
   const { listening, transcript, resetTranscript } = useSpeechRecognition();
 
   const selectedCoach = useAiStore((s) => s.selectedCoach) || "DRAGON";
-  const { queryToAi } = useChatStore((s) => s.actions);
+  const isJeonsePlanningMode = useChatStore((s) => s.isJeonsePlanningMode);
+  const {
+    queryToAi,
+    setIsJeonsePlanningMode,
+    addMessage,
+    setIsJeonsePlanningLoading,
+  } = useChatStore((s) => s.actions);
 
   const [isInputfocused, setIsInputFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  console.log(isJeonsePlanningMode);
+
+  const fetchJeonsePlanning = (text: string) => {
+    console.log(22);
+    addMessage({ speaker: "USER", message: text });
+
+    setIsJeonsePlanningLoading(true);
+
+    queryToAi("", selectedCoach, "jeonsePlanning");
+
+    setIsJeonsePlanningLoading(false);
+    setIsJeonsePlanningMode(false);
+  };
 
   const focusInput = () => {
     setIsInputFocused(true);
@@ -30,6 +50,11 @@ function UserInput() {
         <InputText
           ref={inputRef}
           onAsk={(text) => {
+            if (isJeonsePlanningMode) {
+              fetchJeonsePlanning(text);
+              return;
+            }
+
             queryToAi(text, selectedCoach);
           }}
           isInputfocused={isInputfocused}
@@ -48,7 +73,12 @@ function UserInput() {
         ) : null}
         <InputMic
           onAsk={(text) => {
-            queryToAi(text, selectedCoach);
+            if (isJeonsePlanningMode) {
+              fetchJeonsePlanning(text);
+            } else {
+              queryToAi(text, selectedCoach);
+            }
+
             resetTranscript();
             focusInput();
           }}

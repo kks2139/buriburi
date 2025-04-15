@@ -19,6 +19,7 @@ function InputMic({ onAsk, ...rest }: Props) {
   const isQuerying = useChatStore((s) => s.isQuerying);
   const inputTextValue = useChatStore((s) => s.inputTextValue);
   const { addMessage, setInputTextValue } = useChatStore((s) => s.actions);
+  const isJeonsePlanningMode = useChatStore((s) => s.isJeonsePlanningMode);
 
   const {
     transcript,
@@ -36,10 +37,12 @@ function InputMic({ onAsk, ...rest }: Props) {
   };
 
   const pushMessage = () => {
-    addMessage({
-      speaker: "USER",
-      message: inputValue,
-    });
+    if (!isJeonsePlanningMode) {
+      addMessage({
+        speaker: "USER",
+        message: inputValue,
+      });
+    }
 
     resetTranscript();
     setInputTextValue("");

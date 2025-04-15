@@ -33,6 +33,7 @@ function Chat() {
     setIsFinanceAssetLoading,
     setIsInquiryInterestRateLimitLoading,
     setIsJeonsePlanningLoading,
+    setIsJeonsePlanningMode,
   } = useChatStore((s) => s.actions);
 
   const messagesRef = useRef<HTMLUListElement>(null);
@@ -100,6 +101,8 @@ function Chat() {
 
                     break;
                   case "ENTRY_2":
+                    setIsJeonsePlanningMode(true);
+
                     addMessage({
                       speaker: "USER",
                       message: titleMessage,
@@ -116,6 +119,9 @@ function Chat() {
                     break;
                   case "VIEW_INQUIRY_RESULT":
                     navigate("/result");
+                    break;
+                  case "VIEW_PRODUCT_DETAIL":
+                    navigate("/product");
                     break;
                   case "READY_TO_INQUIRY":
                     addMessage({ speaker: "USER", message: titleMessage });

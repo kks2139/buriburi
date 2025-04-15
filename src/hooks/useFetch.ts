@@ -23,6 +23,7 @@ export type LoanNeedsAnalyzationStatus =
 
 export type SuggestionActionType =
   | "VIEW_INQUIRY_RESULT"
+  | "VIEW_PRODUCT_DETAIL"
   | "RESULT_SUMMARY"
   | "READY_TO_INQUIRY"
   | "CONTINUE_FROM_LAST"
