@@ -184,18 +184,22 @@ function Chat() {
               speaker="AI"
               isLoading
               message={
-                isInquiryInterestRateLimitLoading
-                  ? "잠시만 기다려주세요! 최적의 대출 상품을 찾고 있습니다."
-                  : isFinanceAssetLoading
-                    ? "카카오페이에 연결된\n자산 정보를 불러올게요."
-                    : ""
+                isJeonsePlanningLoading
+                  ? `이 집의 대출 상태, 담보 여부 등 리스크까지 확인해보고 ${selectedCoach === "LINA" ? "알려드릴게요" : "알려줄게"}`
+                  : isInquiryInterestRateLimitLoading
+                    ? "잠시만 기다려주세요!\n최적의 대출 상품을 찾고 있습니다."
+                    : isFinanceAssetLoading
+                      ? "카카오페이에 연결된\n자산 정보를 불러올게요."
+                      : ""
               }
               loadingMessage={
-                isInquiryInterestRateLimitLoading
-                  ? "대출 조회 중"
-                  : isFinanceAssetLoading
-                    ? "자산 불러오는 중"
-                    : "생각중이에요"
+                isJeonsePlanningLoading
+                  ? "등기부등본 조회중"
+                  : isInquiryInterestRateLimitLoading
+                    ? "대출 조회 중"
+                    : isFinanceAssetLoading
+                      ? "자산 불러오는 중"
+                      : "생각중이에요"
               }
             />
           )}
