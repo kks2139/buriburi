@@ -44,6 +44,7 @@ function Message({
 
   return (
     <motion.li
+      data-message={isAi ? "ai" : "user"}
       className={cn("Message", { "show-on-right": speaker === "USER" })}
       initial={{ opacity: 0, transform: "translateY(10px)" }}
       animate={{ opacity: 1, transform: "translateY(0)" }}
