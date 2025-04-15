@@ -10,14 +10,16 @@ export type ApiKey =
   | "fetchFinanceAsset"
   | "inquryInterestRateLimit"
   | "summaryInquiryResult"
-  | "continueFromLast";
+  | "continueFromLast"
+  | "jeonsePlanning";
 
 export type LoanNeedsAnalyzationStatus =
   | "ANALYZE_LOAN_NEEDS"
   | "READY_TO_FETCH_FINANCE_ASSET"
   | "READY_TO_INQUIRY_LOAN"
   | "CONTINUE_FROM_LAST_STATUS"
-  | "LOAN_INQUIRY_COMPLETED";
+  | "LOAN_INQUIRY_COMPLETED"
+  | "JEONSE_INQUIRY_COMPLETED";
 
 export type SuggestionActionType =
   | "VIEW_INQUIRY_RESULT"
@@ -25,7 +27,10 @@ export type SuggestionActionType =
   | "READY_TO_INQUIRY"
   | "CONTINUE_FROM_LAST"
   | "RESET_QUESTION"
-  | "READY_TO_FETCH_ASSET";
+  | "READY_TO_FETCH_ASSET"
+  | "ENTRY_1"
+  | "ENTRY_2"
+  | "VIEW_ANOTHER_JEONSE";
 
 export interface SuggestionBubble {
   actionType?: SuggestionActionType;
@@ -81,6 +86,10 @@ export const apiInfo: Record<ApiKey, Pick<FetchOptions, "url" | "method">> = {
   continueFromLast: {
     url: `${BASE_URL}/continue-from-last`,
     method: "GET",
+  },
+  jeonsePlanning: {
+    url: `${BASE_URL}/jeonse-planning`,
+    method: "POST",
   },
 };
 

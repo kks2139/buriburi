@@ -21,6 +21,7 @@ interface MessageInfo {
   speaker: Speaker;
   message: string;
   suggestions?: SuggestionBubble[];
+  meta?: string;
 }
 
 interface ChatStore {
@@ -29,6 +30,7 @@ interface ChatStore {
   isQuerying: boolean;
   isFinanceAssetLoading: boolean;
   isInquiryInterestRateLimitLoading: boolean;
+  isJeonsePlanningLoading: boolean;
   loanNeedsAnalyzationStatus: LoanNeedsAnalyzationStatus;
   actions: {
     initMessage: (coach?: CoachType) => void;
@@ -38,6 +40,7 @@ interface ChatStore {
     setIsQuerying: (value: boolean) => void;
     setIsFinanceAssetLoading: (value: boolean) => void;
     setIsInquiryInterestRateLimitLoading: (value: boolean) => void;
+    setIsJeonsePlanningLoading: (value: boolean) => void;
     setLoanNeedsAnalyzationStatus: (value: LoanNeedsAnalyzationStatus) => void;
     queryToAi: (
       message: string,
@@ -54,6 +57,7 @@ export const useChatStore = create<ChatStore>()(
     isQuerying: false,
     isFinanceAssetLoading: false,
     isInquiryInterestRateLimitLoading: false,
+    isJeonsePlanningLoading: false,
     loanNeedsAnalyzationStatus: "ANALYZE_LOAN_NEEDS",
     actions: {
       initMessage: (coach) => {
@@ -69,16 +73,18 @@ export const useChatStore = create<ChatStore>()(
                 : "판단 빠른 대출 데이터 분석가 신용철 등장😎 대출이 왜 필요해?",
               suggestions: [
                 {
-                  titleMessage: "100만원 정도",
+                  titleMessage: "비상금 필요",
                   subMessage: isType1
                     ? "바로 가능한 대출 있나요?"
                     : "바로 가능한 대출 찾아줘",
+                  actionType: "ENTRY_1",
                 },
                 {
                   titleMessage: "전세보증금 플랜",
                   subMessage: isType1
-                    ? "내 상황에 맞게 분석하고 알려주세요"
-                    : "내 상황에 맞게 분석하고 알려줘",
+                    ? "가장 유리한 전세대출 조건이 궁금해요"
+                    : "가장 유리한 전세대출 조건이 궁금해",
+                  actionType: "ENTRY_2",
                 },
               ],
             },
@@ -113,6 +119,11 @@ export const useChatStore = create<ChatStore>()(
       setIsInquiryInterestRateLimitLoading: (value) => {
         set((state) => {
           state.isInquiryInterestRateLimitLoading = value;
+        });
+      },
+      setIsJeonsePlanningLoading: (value) => {
+        set((state) => {
+          state.isJeonsePlanningLoading = value;
         });
       },
       setLoanNeedsAnalyzationStatus: (value) => {

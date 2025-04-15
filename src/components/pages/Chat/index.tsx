@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { updateSessionId } from "@/hooks";
@@ -22,6 +22,9 @@ function Chat() {
   const isInquiryInterestRateLimitLoading = useChatStore(
     (s) => s.isInquiryInterestRateLimitLoading,
   );
+  const isJeonsePlanningLoading = useChatStore(
+    (s) => s.isJeonsePlanningLoading,
+  );
   const {
     initMessage,
     addMessage,
@@ -29,10 +32,16 @@ function Chat() {
     setLoanNeedsAnalyzationStatus,
     setIsFinanceAssetLoading,
     setIsInquiryInterestRateLimitLoading,
+    setIsJeonsePlanningLoading,
   } = useChatStore((s) => s.actions);
 
+  const messagesRef = useRef<HTMLUListElement>(null);
+
   const isShowLoading =
-    isQuerying || isFinanceAssetLoading || isInquiryInterestRateLimitLoading;
+    isQuerying ||
+    isFinanceAssetLoading ||
+    isInquiryInterestRateLimitLoading ||
+    isJeonsePlanningLoading;
 
   useEffect(() => {
     if (!messages.length) {
@@ -48,7 +57,7 @@ function Chat() {
 
   return (
     <main className={cn("Chat")}>
-      <ul className={cn("messages")}>
+      <ul ref={messagesRef} className={cn("messages")}>
         <AnimatePresence>
           {messages.map(({ id, speaker, message, suggestions }) => (
             <Message
@@ -62,14 +71,9 @@ function Chat() {
                 subMessage,
                 actionType,
               }) => {
-                console.log(titleMessage, subMessage, actionType);
-
-                // VIEW_INQUIRY_RESULT > 조회결과 화면 호출
-                // RESULT_SUMMARY > summary-inquiry-result GET 호출
-                // READY_TO_INQUIRY > inquiry-ineterst-rate-limit POST 호출
-                // CONTINUE_FROM_LAST > continue-from-last GET 호출
-                // RESET_QUESTION > loan-needs-analyzation & Session 초기화
-                // READY_TO_FETCH_ASSET > fetch-finance-asset 호출
+                if (isShowLoading) {
+                  return;
+                }
 
                 const queryMessage = `${titleMessage} ${subMessage}`;
 
@@ -80,6 +84,35 @@ function Chat() {
                       message: `${titleMessage} ${subMessage}`,
                     });
                     queryToAi(queryMessage, selectedCoach);
+                    break;
+                  case "ENTRY_1":
+                    addMessage({
+                      speaker: "USER",
+                      message: titleMessage,
+                    });
+
+                    setTimeout(() => {
+                      addMessage({
+                        speaker: "AI",
+                        message: `비상금이 필요하시군요!\n비상금의 사용 목적과 필요한 금액을 ${selectedCoach === "LINA" ? "알려주시겠어요?" : "알려줘"}`,
+                      });
+                    }, 500);
+
+                    break;
+                  case "ENTRY_2":
+                    addMessage({
+                      speaker: "USER",
+                      message: titleMessage,
+                    });
+
+                    setTimeout(() => {
+                      addMessage({
+                        speaker: "AI",
+                        meta: "address",
+                        message: `이사가는구나? 집 정보를 먼저 살펴보자.\n알아본 매물 주소를 ${selectedCoach === "LINA" ? "알려주시겠어요?" : "알려줘"}\n\n예시 : 경기도 성남시 분당구 백현동 12-34 번지`,
+                      });
+                    }, 500);
+
                     break;
                   case "VIEW_INQUIRY_RESULT":
                     navigate("/result");
@@ -122,6 +155,15 @@ function Chat() {
                     queryToAi("", selectedCoach, "fetchFinanceAsset");
 
                     setIsFinanceAssetLoading(false);
+                    break;
+                  case "VIEW_ANOTHER_JEONSE":
+                    addMessage({ speaker: "USER", message: titleMessage });
+
+                    setIsJeonsePlanningLoading(true);
+
+                    queryToAi("", selectedCoach, "fetchFinanceAsset");
+
+                    setIsJeonsePlanningLoading(false);
                     break;
                 }
               }}

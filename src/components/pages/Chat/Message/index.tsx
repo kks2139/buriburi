@@ -21,6 +21,7 @@ interface Porps {
   onClickSuggestion?: (value: SuggestionBubble) => void;
   isLoading?: boolean;
   useProfileIcon?: boolean;
+  meta?: string;
 }
 
 function Message({
@@ -31,6 +32,7 @@ function Message({
   onClickSuggestion,
   isLoading,
   useProfileIcon,
+  meta = "",
 }: Porps) {
   const selectedCoach = useAiStore((s) => s.selectedCoach);
 
@@ -45,6 +47,7 @@ function Message({
   return (
     <motion.li
       data-message={isAi ? "ai" : "user"}
+      data-meta={meta}
       className={cn("Message", { "show-on-right": speaker === "USER" })}
       initial={{ opacity: 0, transform: "translateY(10px)" }}
       animate={{ opacity: 1, transform: "translateY(0)" }}
