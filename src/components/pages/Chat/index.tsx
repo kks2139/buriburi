@@ -93,9 +93,11 @@ function Chat() {
                     });
 
                     setTimeout(() => {
+                      const isLina = selectedCoach === "LINA";
+
                       addMessage({
                         speaker: "AI",
-                        message: `비상금이 필요하시군요!\n비상금의 사용 목적과 필요한 금액을 ${selectedCoach === "LINA" ? "알려주시겠어요?" : "알려줘"}`,
+                        message: `비상금이 ${isLina ? "필요하시군요!" : "필요하시구나!"}\n비상금의 사용 목적과 필요한 금액을 ${selectedCoach === "LINA" ? "알려주시겠어요?" : "알려줘!"}`,
                       });
                     }, 500);
 
